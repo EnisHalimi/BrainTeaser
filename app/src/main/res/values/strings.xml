@@ -2,5 +2,5 @@
     <string name="app_name">Brain Teaser</string>
 
     <string name="dummy_button">Click Me!!!</string>
-    <string name="dummy_content">Coming \n SOON\</string>
+    <string name="dummytext">SOON</string>
 </resources>
