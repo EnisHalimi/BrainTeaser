@@ -3,4 +3,10 @@
 
     <string name="dummy_button">Click Me!!!</string>
     <string name="dummytext">SOON</string>
+    <string name="play">Play</string>
+    <string name="options">Options</string>
+    <string name="achievements">Achievements</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -3,45 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/background"
     tools:context="kp.project.brainteaser.MainMenu">
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="150dp"
+        android:layout_height="500dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/background"
-        android:fitsSystemWindows="true">
+        android:layout_marginRight="20dp"
+        android:fitsSystemWindows="true"
+        tools:ignore="RtlHardcoded,UselessParent">
 
         <Button
-            android:id="@+id/dummy_button"
-            style="@android:style/Widget.Holo.Button.Toggle"
-            android:layout_width="wrap_content"
+            android:id="@+id/playButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_above="@+id/achivmentsButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/play"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/achivmentsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:elevation="0dp"
-            android:text="@string/dummy_button"
-            android:textAllCaps="false"
-            tools:ignore="UnusedAttribute" />
+            android:text="@string/achievements"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/optionsButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/dummy_button"
-            android:layout_alignLeft="@+id/dummy_button"
-            android:layout_alignStart="@+id/dummy_button"
-            android:text="@string/dummytext"
-            android:textColor="@android:color/background_dark"
-            android:textSize="32sp" />
-
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/achivmentsButton"
+            android:text="@string/options"
+            android:textAllCaps="false" />
     </RelativeLayout>
 
 </RelativeLayout>
