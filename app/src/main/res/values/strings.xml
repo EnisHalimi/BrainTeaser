@@ -9,4 +9,38 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email (Username)</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="sound">Sound</string>
+    <string name="off">OFF</string>
+    <string name="soundoff">soundOFF</string>
+    <string name="registerbirthday">Birthday</string>
+    <string name="registername">Name</string>
+    <string name="registerpassword">Password</string>
+    <string name="registerusername">Username</string>
+    <string name="register_sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="languageOptions">Language</string>
+    <string name="musicOptions">Music</string>
+    <string name="soundOptions">Sound</string>
+    <string name="languageSwitch">Language</string>
+    <string name="musicSwitch">Music</string>
+    <string name="soundWitch">Sound</string>
+    <string name="saveButton">Save</string>
+    <string name="back">Back</string>
 </resources>
