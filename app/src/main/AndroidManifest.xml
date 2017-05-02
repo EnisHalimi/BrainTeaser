@@ -31,7 +31,8 @@
             android:name=".MainMenu"
             android:label="@string/title_activity_login" />
         <activity android:name=".Options" />
-        <activity android:name=".OrderNumbers"></activity>
+        <activity android:name=".OrderNumbers" />
+        <activity android:name=".TwoPairs"></activity>
     </application>
 
 </manifest>

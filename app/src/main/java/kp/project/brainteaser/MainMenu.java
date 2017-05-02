@@ -49,7 +49,7 @@ public class MainMenu extends AppCompatActivity {
 
         achievementsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(MainMenu.this, "Pressed Options Button", Toast.LENGTH_LONG).show();
+
                 userDB.logout();
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);

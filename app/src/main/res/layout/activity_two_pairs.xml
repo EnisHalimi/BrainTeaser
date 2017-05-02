@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="kp.project.brainteaser.TwoPairs"><![CDATA[
+tools:layout_editor_absoluteY="81dp"
+tools:layout_editor_absoluteX="0dp">
+
+
+]]>
+
+    <include
+        layout="@layout/images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="93dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="0dp" />
+
+    <TextView
+    android:id="@+id/tv_p1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32dp"
+    android:text="@string/p1_0"
+    tools:layout_editor_absoluteX="16dp"
+    tools:layout_editor_absoluteY="16dp"
+    tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>
