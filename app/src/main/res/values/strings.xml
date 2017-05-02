@@ -43,4 +43,8 @@
     <string name="soundWitch">Sound</string>
     <string name="saveButton">Save</string>
     <string name="back">Back</string>
+    <string name="niveli_i_1">Niveli i 1</string>
+    <string name="niveli_i_2">Niveli i 2</string>
+    <string name="niveli_i_3">Niveli i 3</string>
+    <string name="orderNumberStart">Start</string>
 </resources>

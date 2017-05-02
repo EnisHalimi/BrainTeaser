@@ -30,7 +30,19 @@ public class MainMenu extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainMenu.this, "Pressed Play Button", Toast.LENGTH_LONG).show();
+                setContentView(R.layout.activity_play);
+                Button niveli1 = (Button)findViewById(R.id.niveli1);
+                Button niveli2= (Button)findViewById(R.id.niveli2);
+                Button niveli3 = (Button)findViewById(R.id.niveli3);
+                niveli2.setEnabled(false);
+                niveli3.setEnabled(false);
+                niveli1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), OrderNumbers.class);
+                        startActivity(i);
+                    }
+                });
 
             }
         });

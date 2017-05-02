@@ -14,18 +14,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-
-
-        >
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +30,8 @@
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_login" />
-        <activity android:name=".Options"></activity>
+        <activity android:name=".Options" />
+        <activity android:name=".OrderNumbers"></activity>
     </application>
 
 </manifest>
