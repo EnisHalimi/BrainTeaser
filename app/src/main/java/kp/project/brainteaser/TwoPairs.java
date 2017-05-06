@@ -381,8 +381,7 @@ public class TwoPairs extends AppCompatActivity {
                     }).setNegativeButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(TwoPairs.this, "This is the last level", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                    Intent i = new Intent(getApplicationContext(), SwitchColors.class);
                     startActivity(i);
                 }
             })

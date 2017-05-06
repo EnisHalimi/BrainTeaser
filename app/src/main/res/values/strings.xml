@@ -28,7 +28,7 @@
     <string name="sound">Sound</string>
     <string name="off">OFF</string>
     <string name="soundoff">soundOFF</string>
-    <string name="registerbirthday">Birthday</string>
+    <string name="registerbirthday">Age</string>
     <string name="registername">Name</string>
     <string name="registerpassword">Password</string>
     <string name="registerusername">Username</string>

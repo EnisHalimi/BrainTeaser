@@ -18,7 +18,7 @@ public class UserHelper extends SQLiteOpenHelper{
         private static final String TABLE_NAME = "user";
         private  static final String COL_1 = "ID";
         private static final String COL_2 = "name";
-        private static final String COL_3 = "birthday";
+        private static final String COL_3 = "age";
         private static final String COL_4 = "username";
         private static final String COL_5 = "password";
         private static final String COL_6 = "status";
@@ -32,7 +32,7 @@ public class UserHelper extends SQLiteOpenHelper{
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("create table "+TABLE_NAME+ "("+COL_1+ "ID INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_2+ " TEXT, "+COL_3+ " TEXT, "+COL_4+" TEXT, "+COL_5+" TEXT, "+COL_6+ " TEXT)");
+            db.execSQL("create table "+TABLE_NAME+ "("+COL_1+ "ID INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_2+ " TEXT, "+COL_3+ " INTEGER, "+COL_4+" TEXT, "+COL_5+" TEXT, "+COL_6+ " TEXT)");
         }
 
         @Override
@@ -41,12 +41,12 @@ public class UserHelper extends SQLiteOpenHelper{
             onCreate(db);
         }
 
-        public boolean insertData(String name, String birthday, String username, String password, String status)
+        public boolean insertData(String name, int age, String username, String password, String status)
         {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues cv = new ContentValues();
             cv.put(COL_2,name);
-            cv.put(COL_3, birthday);
+            cv.put(COL_3, age);
             cv.put(COL_4,username);
             cv.put(COL_5,password);
             cv.put(COL_6, status);

@@ -32,7 +32,8 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".Options" />
         <activity android:name=".OrderNumbers" />
-        <activity android:name=".TwoPairs"></activity>
+        <activity android:name=".TwoPairs" />
+        <activity android:name=".SwitchColors"></activity>
     </application>
 
 </manifest>

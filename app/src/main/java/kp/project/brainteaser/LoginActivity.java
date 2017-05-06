@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         setContentView(R.layout.activity_sign_up);
                         registerUsername = (EditText)findViewById(R.id.registerUsername);
                         registerPassword = (EditText)findViewById(R.id.registerPassword);
-                        registerDate = (EditText)findViewById(R.id.registerDate);
+                        registerDate = (EditText)findViewById(R.id.registerAge);
                         registerName = (EditText)findViewById(R.id.registerName);
                         signUp = (Button)findViewById(R.id.signUp);
                         back = (Button)findViewById(R.id.backButton);
@@ -121,7 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                     String status = "0";
                     @Override
                     public void onClick(View v) {
-                        boolean isInserted = userDB.insertData(registerName.getText().toString(),registerDate.getText().toString(),registerUsername.getText().toString(), registerPassword.getText().toString(),status);
+                        int age = Integer.parseInt(registerDate.getText().toString());
+                        boolean isInserted = userDB.insertData(registerName.getText().toString(),age,registerUsername.getText().toString(), registerPassword.getText().toString(),status);
                         if(isInserted) {
                             Toast.makeText(LoginActivity.this, "User is registered", Toast.LENGTH_LONG).show();
                             Intent intent = getIntent();
