@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import     android.support.v7.app.AlertDialog.Builder;
+
 
 
 import java.util.ArrayList;
@@ -20,17 +21,29 @@ import java.util.List;
 
 public class OrderNumbers extends AppCompatActivity {
 
+    ScoreHelper scoreDB;
     int counter = 1;
-    Button b1, b2, b3, b4, b5, b6, b7, b8, b9, start;
-    List<Integer> numbers;
+    Button b1, b2, b3, b4, b5, b6, b7, b8, b9, start, pause;
+       List<Integer> numbers;
     int score = 0;
-    TextView time, result;
+    TextView result;
+    ProgressBar timeBar;
+    CountDownTimer timer;
+    long secondsleft = 100000;
+    int userID;
+    String name;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_numbers);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userID = extras.getInt("ID");
+            name = extras.getString("Name");
+        }
         b1 = (Button) findViewById(R.id.button1);
         b2 = (Button) findViewById(R.id.button2);
         b3 = (Button) findViewById(R.id.button3);
@@ -43,52 +56,97 @@ public class OrderNumbers extends AppCompatActivity {
         start = (Button) findViewById(R.id.startButton);
         b1.setBackgroundResource(android.R.drawable.btn_default);
         b2.setBackgroundResource(android.R.drawable.btn_default);
-
         b3.setBackgroundResource(android.R.drawable.btn_default);
-
         b4.setBackgroundResource(android.R.drawable.btn_default);
-
         b5.setBackgroundResource(android.R.drawable.btn_default);
-
         b6.setBackgroundResource(android.R.drawable.btn_default);
-
         b7.setBackgroundResource(android.R.drawable.btn_default);
-
         b8.setBackgroundResource(android.R.drawable.btn_default);
-
         b9.setBackgroundResource(android.R.drawable.btn_default);
-        time = (TextView)findViewById(R.id.time);
+        pause = (Button)findViewById(R.id.playPauseButton);
+        pause.setVisibility(View.INVISIBLE);
         result = (TextView)findViewById(R.id.result);
-
+        timeBar = (ProgressBar) findViewById(R.id.timeBar);
+        scoreDB = new ScoreHelper(this);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start.setVisibility(View.INVISIBLE);
-                game();
-                new CountDownTimer(60000, 1000)
-                {
-
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        int number = Integer.parseInt(time.getText().toString());
-                        number = number -1;
-                        time.setText(""+number);
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        stop();
-                    }
-                }.start();
-
-
+                start();
+               game();
             }
         });
 
+    }
+
+    public void start() {
+        start.setVisibility(View.INVISIBLE);
+        pause.setVisibility(View.VISIBLE);
+        pause();
+        long millisInFuture = secondsleft;
+        long countDownInterval = 1000;
+        timer = new CountDownTimer(millisInFuture, countDownInterval) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeBar.setProgress((int)secondsleft/1000);
+                secondsleft = millisUntilFinished;
+            }
+            @Override
+            public void onFinish() {
+                stop();
+            }
+        }.start();
+    }
+
+    public void pause()
+    {
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(OrderNumbers.this);
+                pauseMenu
+
+                        .setMessage("Game Paused")
+                        .setCancelable(false)
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                start();
+                            }
+                        })
+                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), TwoPairs.class);
+                                i.putExtra("ID",userID);
+                                i.putExtra("Name",name);
+                                startActivity(i);
+                            }
+                        })
+                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                                i.putExtra("ID",userID);
+                                i.putExtra("Name",name);
+                                startActivity(i);
+                            }
+                        });
+                AlertDialog pauseDialog = pauseMenu.create();
+                pauseDialog.show();
+            }
+        });
 
     }
+
+
     public void stop()
     {
+
+        if(userID != 0)
+        {
+            scoreDB.create(userID,"Order Numbers",score);
+        }
 
      AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(OrderNumbers.this);
         oalertDialogBuilder
@@ -98,15 +156,20 @@ public class OrderNumbers extends AppCompatActivity {
                 .setPositiveButton("Restart", new DialogInterface.OnClickListener(){
                     @Override
                      public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = getIntent();
+                        Intent i = getIntent();
                         finish();
-                        startActivity(intent);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
                         }
                 })
                 .setNegativeButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
                     Intent i = new Intent(getApplicationContext(), TwoPairs.class);
+                    i.putExtra("ID",userID);
+                    i.putExtra("Name",name);
                     startActivity(i);
                 }
             })
@@ -114,6 +177,8 @@ public class OrderNumbers extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                i.putExtra("ID",userID);
+                i.putExtra("Name",name);
                 startActivity(i);
             }
         });

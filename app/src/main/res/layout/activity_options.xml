@@ -46,9 +46,15 @@
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:background="@android:drawable/alert_light_frame"
                 android:text="@string/saveButton" />
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/alert_light_frame"
+                android:text="@string/log_out" />
 
         </LinearLayout>
     </ScrollView>

@@ -58,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
     {
         Toast.makeText(LoginActivity.this, "Welcome "+name, Toast.LENGTH_LONG).show();
         Intent i = new Intent(getApplicationContext(), MainMenu.class);
-       i.putExtra("Username", username);
-       i.putExtra("ID",id);
+        i.putExtra("Name", name);
+        i.putExtra("ID",id);
         finish();
         startActivity(i);
     }

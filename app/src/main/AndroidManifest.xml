@@ -33,7 +33,8 @@
         <activity android:name=".Options" />
         <activity android:name=".OrderNumbers" />
         <activity android:name=".TwoPairs" />
-        <activity android:name=".SwitchColors"></activity>
+        <activity android:name=".SwitchColors" />
+        <activity android:name=".Achievements"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +21,9 @@ import java.util.Random;
 
 public class TwoPairs extends AppCompatActivity {
 
-    TextView tv_p1;
-    //TextView tv_p2;
 
     ImageView iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24,iv_31, iv_32, iv_33, iv_34;
-
+    ScoreHelper scoreDB;
     //array per imazhet
     int []cardsArray={101, 102, 103, 104, 105, 106, 201, 202, 203, 204, 205, 206};
 
@@ -38,14 +37,65 @@ public class TwoPairs extends AppCompatActivity {
     int clicked;
     int cardNumber=1;
     int playerPoins=0;
+    int userID;
+    String name;
+    Button pause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_pairs);
+        scoreDB = new ScoreHelper(this);
 
-        tv_p1=(TextView)findViewById(R.id.tv_p1);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userID = extras.getInt("ID");
+            name = extras.getString("Name");
+        }
+        pause = (Button)findViewById(R.id.playPauseButton);
+        pause.setOnClickListener(new View.OnClickListener() {
+            AlertDialog pauseDialog;
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(TwoPairs.this);
+                pauseMenu
 
+                        .setMessage("Game Paused")
+                        .setCancelable(false)
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                hide();
+                            }
+                        })
+                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), SwitchColors.class);
+                                i.putExtra("ID",userID);
+                                i.putExtra("Name",name);
+                                startActivity(i);
+                            }
+                        })
+                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                                i.putExtra("ID",userID);
+                                i.putExtra("Name",name);
+                                startActivity(i);
+                            }
+                        });
+                pauseDialog = pauseMenu.create();
+                pauseDialog.show();
+
+            }
+
+            public void hide()
+            {
+                pauseDialog.hide();
+            }
+        });
         iv_11=(ImageView)findViewById(R.id.iv_11);
         iv_12=(ImageView)findViewById(R.id.iv_12);
         iv_13=(ImageView)findViewById(R.id.iv_13);
@@ -74,7 +124,7 @@ public class TwoPairs extends AppCompatActivity {
 
         //load frondofcardsresources
         frontOfCardsResources();
-        tv_p1.setTextColor(Color.GRAY);
+
 
         iv_11.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,7 +329,6 @@ public class TwoPairs extends AppCompatActivity {
             }
             //add points
             playerPoins+=2;
-            tv_p1.setText("Points:"+playerPoins);
 
         }else{
             iv_11.setImageResource(R.drawable.question);
@@ -367,21 +416,38 @@ public class TwoPairs extends AppCompatActivity {
                 iv_33.getVisibility()==View.INVISIBLE &&
                 iv_34.getVisibility()==View.INVISIBLE){
 
+            String check;
+            if(userID != 0)
+            {
+                 boolean status = scoreDB.create(userID,"Two Pairs",playerPoins);
+                if(status)
+                    check="Saved";
+                else
+                    check="Not Saved";
+            }
+            else
+                check="Not Saved";
+
             AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(TwoPairs.this);
             alertDialogBuilder
-                    .setMessage("Game Over \nScore: "+playerPoins)
+                    .setMessage("Game Over \nScore: "+playerPoins+"  "+check)
                     .setCancelable(false)
                     .setPositiveButton("Restart", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent=new Intent(getApplicationContext(),TwoPairs.class);
-                            startActivity(intent);
+                            Intent i=new Intent(getApplicationContext(),TwoPairs.class);
+                            i.putExtra("ID",userID);
+                            i.putExtra("Name",name);
                             finish();
+                            startActivity(i);
+
                         }
                     }).setNegativeButton("Next", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent i = new Intent(getApplicationContext(), SwitchColors.class);
+                    i.putExtra("ID",userID);
+                    i.putExtra("Name",name);
                     startActivity(i);
                 }
             })
@@ -389,6 +455,8 @@ public class TwoPairs extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                            i.putExtra("ID",userID);
+                            i.putExtra("Name",name);
                             startActivity(i);
                         }
                     });

@@ -9,6 +9,7 @@ package kp.project.brainteaser;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.Button;
+ import android.widget.ProgressBar;
  import android.widget.Switch;
  import android.widget.TextView;
  import android.widget.Toast;
@@ -18,53 +19,65 @@ package kp.project.brainteaser;
 
 public class SwitchColors extends AppCompatActivity {
     int score=0;
-    Button b, b1,b2,b3;
-    TextView t1,t2;
+    Button  b1,b2,b3,pause,start;
+    TextView t1;
     String []color=new String[11];
     String[]colorButtons=new String[3];
+    ProgressBar timeBar;
+    CountDownTimer timer;
+    long secondsleft = 100000;
+    ScoreHelper scoreDB;
+    int userID;
+    String name;
+    int count=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_switch_colors);
-        b=(Button)findViewById(R.id.startButton);
-        b1=(Button)findViewById(R.id.button);
-        b2=(Button)findViewById(R.id.button2);
-        b3=(Button)findViewById(R.id.button3);
-        t1=(TextView)findViewById(R.id.textColor);
-        t2=(TextView)findViewById(R.id.score);
+        pause = (Button) findViewById(R.id.playPauseButton);
+        scoreDB = new ScoreHelper(this);
+        start = (Button) findViewById(R.id.startButton);
+        b1 = (Button) findViewById(R.id.button);
+        b2 = (Button) findViewById(R.id.button2);
+        b3 = (Button) findViewById(R.id.button3);
+        t1 = (TextView) findViewById(R.id.textColor);
 
-
+        timeBar = (ProgressBar) findViewById(R.id.timeBar);
+        pause.setVisibility(View.INVISIBLE);
         b1.setVisibility(View.INVISIBLE);
         b2.setVisibility(View.INVISIBLE);
         b3.setVisibility(View.INVISIBLE);
         t1.setVisibility(View.INVISIBLE);
-
+        timeBar = (ProgressBar) findViewById(R.id.timeBar);
         createColorNames();
-        b.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                new CountDownTimer(63000,3000){
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        startGame();
-                        t2.setText("Score: "+score);
-                    }
+                start();
+                startGame();
+            }
+        });
+    }
+    public void pause()
+    {
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(SwitchColors.this);
+                pauseMenu
 
-                    @Override
-                    public void onFinish() {
-                        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(SwitchColors.this);
-                        alertDialogBuilder
-                                .setMessage("Game Over \nScore: "+score)
-                                .setCancelable(false)
-                                .setPositiveButton("Restart", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent=new Intent(getApplicationContext(),SwitchColors.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }).setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                        .setMessage("Game Paused")
+                        .setCancelable(false)
+                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                start();
+                            }
+                        })
+                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(SwitchColors.this, "This is the last level", Toast.LENGTH_LONG).show();
@@ -72,22 +85,95 @@ public class SwitchColors extends AppCompatActivity {
                                 startActivity(i);
                             }
                         })
-                                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                        startActivity(i);
-                                    }
-                                });
-                        AlertDialog alertDialog=alertDialogBuilder.create();
-                        alertDialog.show();
-                    }
-                }.start();
+                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                                startActivity(i);
+                            }
+                        });
+                AlertDialog pauseDialog = pauseMenu.create();
+                pauseDialog.show();
             }
         });
 
+    }
+
+    public void start() {
+        start.setVisibility(View.INVISIBLE);
+        pause.setVisibility(View.VISIBLE);
+        pause();
+        long millisInFuture = secondsleft;
+        long countDownInterval = 1000;
+
+        timer = new CountDownTimer(millisInFuture, countDownInterval) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeBar.setProgress((int)secondsleft/1000);
+                secondsleft = millisUntilFinished;
+                if(count == 4)
+                {
+                    startGame();
+                    count=0;
+                }
+                else
+                    count++;
+
+            }
+            @Override
+            public void onFinish() {
+                stop();
+            }
+        }.start();
 
     }
+
+    public void stop()
+    {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userID = extras.getInt("ID");
+        }
+        if(userID != 0)
+        {
+            scoreDB.create(userID,"Switch Colors",score);
+        }
+
+        AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(SwitchColors.this);
+        alertDialogBuilder
+                .setMessage("Game Over \nScore: "+score)
+                .setCancelable(false)
+                .setPositiveButton("Restart", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i=new Intent(getApplicationContext(),SwitchColors.class);
+                        finish();
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+
+                    }
+                }).setNegativeButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(SwitchColors.this, "This is the last level", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                i.putExtra("ID",userID);
+                startActivity(i);
+            }
+        })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        startActivity(i);
+                    }
+                });
+        AlertDialog alertDialog=alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     private void createColorNames(){
         color[0]="BLACK";
         color[10]="GRAY";
@@ -120,7 +206,7 @@ public class SwitchColors extends AppCompatActivity {
         colorButtons[0]=color[0];
         colorButtons[1]=color[1];
         colorButtons[2]=color[2];
-        b.setVisibility(View.INVISIBLE);
+        start.setVisibility(View.INVISIBLE);
         b1.setVisibility(View.VISIBLE);
         b2.setVisibility(View.VISIBLE);
         b3.setVisibility(View.VISIBLE);
@@ -141,7 +227,16 @@ public class SwitchColors extends AppCompatActivity {
                 String textButtonColor=colorButtons[0];
                 if(textColor.equals(textButtonColor)){
                     score++;
+
                 }
+                count=0;
+                android.os.Handler handler = new android.os.Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startGame();;
+                    }
+                },1000);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +249,16 @@ public class SwitchColors extends AppCompatActivity {
                 String textButtonColor=colorButtons[1];
                 if(textColor.equals(textButtonColor)){
                     score++;
+
                 }
+                count=0;
+                android.os.Handler handler = new android.os.Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startGame();;
+                    }
+                },1000);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +271,16 @@ public class SwitchColors extends AppCompatActivity {
                 String textButtonColor=colorButtons[2];
                 if(textColor.equals(textButtonColor)){
                     score++;
+
                 }
+                count=0;
+                android.os.Handler handler = new android.os.Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startGame();;
+                    }
+                },1000);
             }
         });
     }

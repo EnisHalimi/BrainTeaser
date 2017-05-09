@@ -19,6 +19,7 @@ public class MainMenu extends AppCompatActivity {
     private String user_name;
     private int userID;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
@@ -40,6 +41,8 @@ public class MainMenu extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getApplicationContext(), OrderNumbers.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",user_name);
                         startActivity(i);
                     }
                 });
@@ -50,8 +53,10 @@ public class MainMenu extends AppCompatActivity {
         achievementsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                userDB.logout();
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+               // userDB.logout();
+                Intent i = new Intent(getApplicationContext(), Achievements.class);
+                i.putExtra("ID",userID);
+                i.putExtra("Name",user_name);
                 startActivity(i);
             }
         });
@@ -70,12 +75,14 @@ public class MainMenu extends AppCompatActivity {
 
     public void setUser()
     {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            user_name = extras.getString("Username");
-            userID = extras.getInt("ID");
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                user_name = extras.getString("Name");
+                userID = extras.getInt("ID");
 
-        }
+            }
+
+
     }
 }
 

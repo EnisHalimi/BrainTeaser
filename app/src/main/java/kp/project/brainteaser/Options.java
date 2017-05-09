@@ -1,5 +1,6 @@
 package kp.project.brainteaser;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,8 @@ import android.widget.Toast;
 public class Options extends AppCompatActivity {
     Switch musicSwitch, soundSwitch,languageSwitch;
     OptionsHelper optionsDB;
-    Button saveButton;
+    UserHelper userDB;
+    Button saveButton,logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,9 @@ public class Options extends AppCompatActivity {
         languageSwitch = (Switch) findViewById(R.id.languageSwitch);
         optionsDB = new OptionsHelper(this);
         saveButton = (Button) findViewById(R.id.saveButton);
+        logout = (Button)findViewById(R.id.logout);
         Cursor res = optionsDB.getData();
+        userDB = new UserHelper(this);
         if(res.getCount() > 0)
         {
             while(res.moveToNext())
@@ -41,7 +45,14 @@ public class Options extends AppCompatActivity {
             }
         }
         save();
-
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userDB.logout();
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void save()
