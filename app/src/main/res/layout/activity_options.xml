@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
@@ -14,9 +14,10 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="20dp">
+        android:layout_height="105dp"
+        android:background="@drawable/blackboard"
+        android:padding="20dp"
+        android:layout_weight="0.31">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,34 +28,40 @@
                 android:id="@+id/musicSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/musicSwitch" />
+                android:text="@string/musicSwitch"
+                android:textColor="@color/White" />
 
             <Switch
                 android:id="@+id/soundSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/soundWitch"
+                android:textColor="@color/White"
                 tools:checked="false" />
 
             <Switch
                 android:id="@+id/languageSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/languageSwitch" />
+                android:text="@string/languageSwitch"
+                android:textColor="@color/White" />
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/alert_light_frame"
-                android:text="@string/saveButton" />
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/graybtn"
+                android:text="@string/saveButton"
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/alert_light_frame"
-                android:text="@string/log_out" />
+                android:background="@drawable/graybtn"
+                android:text="@string/log_out"
+                android:textAllCaps="false" />
 
         </LinearLayout>
     </ScrollView>

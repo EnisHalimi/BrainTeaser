@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,19 +15,11 @@
 
     <!-- Login progress -->
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="261dp"
+        android:background="@drawable/blackboard"
         android:padding="20dp">
 
         <LinearLayout
@@ -41,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/username"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/White" />
 
             <EditText
                 android:id="@+id/password"
@@ -49,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/White" />
 
             <Button
                 android:id="@+id/sign_in"
@@ -57,8 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@android:drawable/alert_light_frame"
+                android:background="@drawable/graybtn"
                 android:text="@string/action_sign_in"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
             <Button
@@ -67,8 +62,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@android:drawable/alert_light_frame"
+                android:background="@drawable/graybtn"
                 android:text="@string/action_register"
+                android:textAllCaps="false"
                 android:textStyle="bold" />
 
         </LinearLayout>

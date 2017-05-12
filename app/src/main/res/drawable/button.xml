@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/GrayPressed"
+        android:state_pressed="true"/>
+    <item android:drawable="@color/GrayPressed"
+        android:state_focused="true" />
+    <item android:drawable="@color/Gray" />
+
+    <item android:drawable="@color/GrayPressed"
+        android:state_enabled="false"/>
+    <item android:drawable="@color/GrayPressed"
+        android:state_active="true"/>
+
+
+</selector>

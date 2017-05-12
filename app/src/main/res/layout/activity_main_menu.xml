@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
@@ -12,8 +12,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="208dp"
+        android:background="@drawable/blackboard"
         android:padding="20dp">
 
         <LinearLayout
@@ -25,7 +25,8 @@
                 android:id="@+id/playButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/alert_light_frame"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/graybtn"
                 android:text="@string/play"
                 android:textAllCaps="false" />
 
@@ -33,7 +34,8 @@
                 android:id="@+id/achivmentsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/alert_light_frame"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/graybtn"
                 android:text="@string/achievements"
                 android:textAlignment="center"
                 android:textAllCaps="false" />
@@ -42,7 +44,7 @@
                 android:id="@+id/optionsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/alert_light_frame"
+                android:background="@drawable/graybtn"
                 android:text="@string/options"
                 android:textAllCaps="false" />
 

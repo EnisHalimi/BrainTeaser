@@ -2,20 +2,19 @@ package kp.project.brainteaser;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Interpolator;
-import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Collections;
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 
@@ -26,6 +25,7 @@ public class TwoPairs extends AppCompatActivity {
     ScoreHelper scoreDB;
     //array per imazhet
     int []cardsArray={101, 102, 103, 104, 105, 106, 201, 202, 203, 204, 205, 206};
+    TextView t1;
 
     //imazhet aktuale
     int image101, image102, image103, image104, image105, image106, image201, image202, image203, image204, image205, image206;
@@ -41,6 +41,7 @@ public class TwoPairs extends AppCompatActivity {
     String name;
     Button pause;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class TwoPairs extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
+        t1 = (TextView) findViewById(R.id.result);
+
         pause = (Button)findViewById(R.id.playPauseButton);
         pause.setOnClickListener(new View.OnClickListener() {
             AlertDialog pauseDialog;
@@ -143,6 +146,7 @@ public class TwoPairs extends AppCompatActivity {
         iv_13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int theCard= Integer.parseInt((String)v.getTag());
                 doStuff(iv_13, theCard);
             }
@@ -150,6 +154,7 @@ public class TwoPairs extends AppCompatActivity {
         iv_14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int theCard= Integer.parseInt((String)v.getTag());
                 doStuff(iv_14, theCard);
             }
@@ -213,6 +218,8 @@ public class TwoPairs extends AppCompatActivity {
 
     }
     private void doStuff(ImageView iv, int card){
+        t1.setVisibility(View.INVISIBLE);
+
         if(card==0){
             iv.setImageResource(array[0]);
         }else if(card==1){

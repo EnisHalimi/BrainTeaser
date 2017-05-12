@@ -2,6 +2,7 @@ package kp.project.brainteaser;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -69,29 +70,36 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-                Cursor res = userDB.getData();
-                if(res.getCount()== 0)
-                    return;
-
-                while(res.moveToNext())
+                if(user.length() < 4)
                 {
-                    if(user.equals(res.getString(3)))
-                    {
-                        if(pass.equals( res.getString(4)))
-                        {
-                          userDB.loginStatus(res.getInt(0));
-                          logging(user, res.getInt(0), res.getString(1));
-                          return;
-
-                        }
-                    }
-
-
+                    Toast.makeText(LoginActivity.this, "Please write a longer Username", Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(LoginActivity.this,"Username or Password don't match",Toast.LENGTH_LONG).show();
+                else if(pass.length() < 4)
+                {
+                    Toast.makeText(LoginActivity.this, "Please write a longer Password", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Cursor res = userDB.getData();
+                    if (res.getCount() == 0)
+                        return;
 
+                    while (res.moveToNext()) {
+                        if (user.equals(res.getString(3))) {
+                            if (pass.equals(res.getString(4))) {
+                                userDB.loginStatus(res.getInt(0));
+                                logging(user, res.getInt(0), res.getString(1));
+                                return;
+
+                            }
+                        }
+
+
+                    }
+                    Toast.makeText(LoginActivity.this, "Username or Password don't match", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -121,8 +129,36 @@ public class LoginActivity extends AppCompatActivity {
                     String status = "0";
                     @Override
                     public void onClick(View v) {
-                        int age = Integer.parseInt(registerDate.getText().toString());
-                        boolean isInserted = userDB.insertData(registerName.getText().toString(),age,registerUsername.getText().toString(), registerPassword.getText().toString(),status);
+                        String age = registerDate.getText().toString();
+                        String name = registerName.getText().toString();
+                        String password = registerPassword.getText().toString();
+                        String username = registerUsername.getText().toString();
+                        if(exists(username))
+                        {
+                            Toast.makeText(LoginActivity.this, "Username already exists", Toast.LENGTH_LONG).show();
+                        }
+                        else if (username.length() < 4)
+                        {
+                            Toast.makeText(LoginActivity.this, "Please write a longer username", Toast.LENGTH_LONG).show();
+                        }
+                        else if (password.length() < 6)
+                        {
+                            Toast.makeText(LoginActivity.this, "Please write a longer password", Toast.LENGTH_LONG).show();
+                        }
+                        else if (name.length() < 3)
+                        {
+                            Toast.makeText(LoginActivity.this, "Please write a longer name", Toast.LENGTH_LONG).show();
+                        }
+
+                        else if (age.length() < 1)
+                        {
+                            Toast.makeText(LoginActivity.this, "Please write a valid age", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+
+                        int Age = Integer.parseInt(age);
+                        boolean isInserted = userDB.insertData(name,Age,username,password,status);
                         if(isInserted) {
                             Toast.makeText(LoginActivity.this, "User is registered", Toast.LENGTH_LONG).show();
                             Intent intent = getIntent();
@@ -131,7 +167,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else
                             Toast.makeText(LoginActivity.this, "User is not registered", Toast.LENGTH_LONG).show();
-                    }
+                        }
+                        }
                 }
         );
         back.setOnClickListener(new OnClickListener() {
@@ -143,6 +180,25 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean exists(String username)
+    {
+        Cursor res = userDB.getData();
+        if (res.getCount() == 0)
+            return false;
+
+        while (res.moveToNext()) {
+            if (username.equals(res.getString(3))) {
+
+                return true;
+
+
+            }
+
+
+        }
+        return false;
     }
 }
 

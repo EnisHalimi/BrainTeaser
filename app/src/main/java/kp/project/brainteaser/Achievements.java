@@ -11,7 +11,6 @@ import org.w3c.dom.Text;
 public class Achievements extends AppCompatActivity {
     ScoreHelper scoreDB;
     TextView text;
-    ListView list;
     String user_name;
     int userID;
      @Override
@@ -28,7 +27,7 @@ public class Achievements extends AppCompatActivity {
         }
         scoreDB = new ScoreHelper(this);
         Cursor res = scoreDB.getData();
-        list = (ListView)findViewById(R.id.list);
+
 
         if(res.getCount()== 0)
             return;

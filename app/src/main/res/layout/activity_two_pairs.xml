@@ -5,9 +5,10 @@
     android:id="@+id/twoPairsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:background="@drawable/background"
     android:gravity="top|center"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="kp.project.brainteaser.TwoPairs">
 
 
@@ -35,7 +36,7 @@
     <include
         layout="@layout/images"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="339dp"
 
         />
 
@@ -43,12 +44,13 @@
         android:id="@+id/footerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_gravity="bottom|center">
 
         <LinearLayout
             android:id="@+id/helpLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:orientation="vertical">
 
             <TextView
@@ -57,7 +59,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/twoPairsHelp" />
+                android:text="@string/twoPairsHelp"
+                android:textColor="@color/Black" />
 
         </LinearLayout>
     </ScrollView>

@@ -49,9 +49,11 @@
     <string name="orderNumberStart">Play</string>
     <string name="p1_0">P1:0</string>
     <string name="helping_image">Helping Image</string>
-    <string name="orderNumbersResults">This game is simple. Try to hit the numbers in the row and order them from the lowest to the biggest. Try how many can you score in 100 seconds. Press PLAY when ready.</string>
+    <string name="orderNumbersResults">This game is simple. Try to hit the numbers in the row and order them from the lowest to the biggest. Try how many can you score in 60 seconds. Press PLAY when ready.</string>
     <string name="log_out">Log Out</string>
     <string name="twoPairsHelp">This game has no timer so take your time. Try to find numbers in pairs hidden. Good luck.</string>
-    <string name="you_need_to_select_the_color_that_is_written_and_press_the_button_with_that_color_try_how_many_can_you_score_in_100_seconds_press_play_when_ready">You need to select the color that is written and press the button with that color.Try how many can you score in 100 seconds. Press PLAY when ready.</string>
+    <string name="you_need_to_select_the_color_that_is_written_and_press_the_button_with_that_color_try_how_many_can_you_score_in_100_seconds_press_play_when_ready">You need to choose the color of the text, its very tricky.Try how many can you score in 60 seconds. Press PLAY when ready.</string>
     <string name="color">Color</string>
+    <string name="wordGameHelp">This game is tricky. Try to guess what the scrambled word means and select the answer below. Try your best</string>
+    <string name="simple_just_add_numbers_and_click_the_right_results">Simple just add numbers and click the right results</string>
 </resources>

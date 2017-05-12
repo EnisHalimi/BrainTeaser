@@ -34,7 +34,9 @@
         <activity android:name=".OrderNumbers" />
         <activity android:name=".TwoPairs" />
         <activity android:name=".SwitchColors" />
-        <activity android:name=".Achievements"></activity>
+        <activity android:name=".Achievements" />
+        <activity android:name=".WordGame" />
+        <activity android:name=".AnimationMath"></activity>
     </application>
 
 </manifest>

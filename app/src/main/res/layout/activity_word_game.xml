@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/switchColorsLayout"
+    android:id="@+id/wordGameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="top|center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="kp.project.brainteaser.SwitchColors">
-
+    tools:context="kp.project.brainteaser.WordGame">
 
     <HorizontalScrollView
         android:id="@+id/headerView"
@@ -38,74 +37,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <ScrollView
-        android:id="@+id/gameLayout"
         android:layout_width="match_parent"
-        android:layout_height="307dp"
+        android:layout_height="296dp"
+        android:layout_gravity="center"
         android:background="@drawable/blackboard"
-        android:padding="17dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textColor"
+                android:id="@+id/text"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="30dp"
-                android:layout_weight="0.04"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="@string/color"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="73dp" />
+                android:textColor="@color/White"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/graybtn"
-                android:gravity="center"
-                android:text="@string/color"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="155dp" />
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/third"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/graybtn"
-                android:gravity="center"
-                android:text="@string/color"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="294dp" />
+                android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/second"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/graybtn"
-                android:gravity="center"
-                android:text="@string/color"
+                android:textAllCaps="false" />
 
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="218dp" />
         </LinearLayout>
     </ScrollView>
 
     <ScrollView
         android:id="@+id/footerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/helpLayout"
@@ -118,16 +103,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/you_need_to_select_the_color_that_is_written_and_press_the_button_with_that_color_try_how_many_can_you_score_in_100_seconds_press_play_when_ready"
+                android:text="@string/wordGameHelp"
                 android:textColor="@color/Black" />
-
 
             <Button
                 android:id="@+id/startButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/graybtn"
-                android:text="@string/orderNumberStart" />
+                android:text="@string/orderNumberStart"
+                android:textAllCaps="false" />
+
         </LinearLayout>
     </ScrollView>
 

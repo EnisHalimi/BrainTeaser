@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="@drawable/login_background"
+    android:background="@drawable/background"
     android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="328dp"
+        android:background="@drawable/blackboard"
         android:padding="20dp">
 
         <LinearLayout
@@ -31,7 +31,9 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="@string/registerusername"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/White"
+                 />
 
             <EditText
                 android:id="@+id/registerPassword"
@@ -39,14 +41,16 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="@string/registerpassword"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/White" />
 
             <EditText
                 android:id="@+id/registerName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/registername"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/White" />
 
             <EditText
 
@@ -56,23 +60,26 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="@string/registerbirthday"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/White" />
 
             <Button
                 android:id="@+id/signUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@android:drawable/alert_light_frame"
-                android:text="@string/register_sign_up" />
+                android:background="@drawable/graybtn"
+                android:text="@string/register_sign_up"
+                android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/backButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@android:drawable/alert_light_frame"
-                android:text="@string/back" />
+                android:background="@drawable/graybtn"
+                android:text="@string/back"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

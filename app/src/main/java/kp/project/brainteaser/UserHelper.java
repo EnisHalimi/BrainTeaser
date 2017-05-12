@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.sql.Date;
 
@@ -78,6 +79,9 @@ public class UserHelper extends SQLiteOpenHelper{
             return false;
     }
 
+
+
+
         public Cursor getData()
         {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -85,6 +89,8 @@ public class UserHelper extends SQLiteOpenHelper{
             return res;
 
         }
+
+
     }
 
 

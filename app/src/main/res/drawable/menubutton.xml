@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:state_pressed="true" android:drawable="@drawable/buttonpressed" />
+    <item android:state_focused="true" android:drawable="@drawable/buttonpressed" />
+    <item android:drawable="@drawable/button3d" />
+    <item android:state_enabled="false" android:drawable="@drawable/buttonpressed" />
+    <item android:state_active="true" android:drawable="@drawable/buttonpressed" />
+</selector>

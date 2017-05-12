@@ -29,7 +29,7 @@ public class OrderNumbers extends AppCompatActivity {
     TextView result;
     ProgressBar timeBar;
     CountDownTimer timer;
-    long secondsleft = 100000;
+    long secondsleft = 60000;
     int userID;
     String name;
 
@@ -54,19 +54,21 @@ public class OrderNumbers extends AppCompatActivity {
         b8 = (Button) findViewById(R.id.button8);
         b9 = (Button) findViewById(R.id.button9);
         start = (Button) findViewById(R.id.startButton);
-        b1.setBackgroundResource(android.R.drawable.btn_default);
-        b2.setBackgroundResource(android.R.drawable.btn_default);
-        b3.setBackgroundResource(android.R.drawable.btn_default);
-        b4.setBackgroundResource(android.R.drawable.btn_default);
-        b5.setBackgroundResource(android.R.drawable.btn_default);
-        b6.setBackgroundResource(android.R.drawable.btn_default);
-        b7.setBackgroundResource(android.R.drawable.btn_default);
-        b8.setBackgroundResource(android.R.drawable.btn_default);
-        b9.setBackgroundResource(android.R.drawable.btn_default);
+        b1.setBackgroundResource(R.drawable.graybtn);
+        b2.setBackgroundResource(R.drawable.graybtn);
+        b3.setBackgroundResource(R.drawable.graybtn);
+        b4.setBackgroundResource(R.drawable.graybtn);
+        b5.setBackgroundResource(R.drawable.graybtn);
+        b6.setBackgroundResource(R.drawable.graybtn);
+        b7.setBackgroundResource(R.drawable.graybtn);
+        b8.setBackgroundResource(R.drawable.graybtn);
+        b9.setBackgroundResource(R.drawable.graybtn);
         pause = (Button)findViewById(R.id.playPauseButton);
         pause.setVisibility(View.INVISIBLE);
         result = (TextView)findViewById(R.id.result);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
+        timeBar.setMax(60);
+        timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
         scoreDB = new ScoreHelper(this);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,15 +145,23 @@ public class OrderNumbers extends AppCompatActivity {
     public void stop()
     {
 
+        String check;
         if(userID != 0)
         {
-            scoreDB.create(userID,"Order Numbers",score);
+            boolean status = scoreDB.create(userID,"Order Numbers",score);
+            if(status)
+                check="Saved";
+            else
+                check="Not Saved";
         }
+        else
+            check="Not Saved";
 
-     AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(OrderNumbers.this);
+
+        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(OrderNumbers.this);
         oalertDialogBuilder
 
-                .setMessage("Game Over\nScore: "+score)
+                .setMessage("Game Over\nScore: "+score+" "+check)
                 .setCancelable(false)
                 .setPositiveButton("Restart", new DialogInterface.OnClickListener(){
                     @Override
@@ -216,23 +226,23 @@ public class OrderNumbers extends AppCompatActivity {
         result.setText("");
         counter = 1;
         b1.setEnabled(true);
-        b1.setBackgroundResource(android.R.drawable.btn_default);
+        b1.setBackgroundResource(R.drawable.graybtn);
         b2.setEnabled(true);
-        b2.setBackgroundResource(android.R.drawable.btn_default);
+        b2.setBackgroundResource(R.drawable.graybtn);
         b3.setEnabled(true);
-        b3.setBackgroundResource(android.R.drawable.btn_default);
+        b3.setBackgroundResource(R.drawable.graybtn);
         b4.setEnabled(true);
-        b4.setBackgroundResource(android.R.drawable.btn_default);
+        b4.setBackgroundResource(R.drawable.graybtn);
         b5.setEnabled(true);
-        b5.setBackgroundResource(android.R.drawable.btn_default);
+        b5.setBackgroundResource(R.drawable.graybtn);
         b6.setEnabled(true);
-        b6.setBackgroundResource(android.R.drawable.btn_default);
+        b6.setBackgroundResource(R.drawable.graybtn);
         b7.setEnabled(true);
-        b7.setBackgroundResource(android.R.drawable.btn_default);
+        b7.setBackgroundResource(R.drawable.graybtn);
         b8.setEnabled(true);
-        b8.setBackgroundResource(android.R.drawable.btn_default);
+        b8.setBackgroundResource(R.drawable.graybtn);
         b9.setEnabled(true);
-        b9.setBackgroundResource(android.R.drawable.btn_default);
+        b9.setBackgroundResource(R.drawable.graybtn);
         numbers = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
             numbers.add(i);
@@ -260,11 +270,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b1.getText().toString());
                 if (number == counter) {
-                    b1.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b1.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b1.setEnabled(false);
                 } else {
-                    b1.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b1.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -278,11 +288,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b2.getText().toString());
                 if (number == counter) {
-                    b2.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b2.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b2.setEnabled(false);
                 } else {
-                    b2.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b2.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -295,11 +305,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b3.getText().toString());
                 if (number == counter) {
-                    b3.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b3.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b3.setEnabled(false);
                 } else {
-                    b3.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b3.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -312,11 +322,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b4.getText().toString());
                 if (number == counter) {
-                    b4.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b4.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b4.setEnabled(false);
                 } else {
-                    b4.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b4.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -329,11 +339,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b5.getText().toString());
                 if (number == counter) {
-                    b5.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b5.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b5.setEnabled(false);
                 } else {
-                    b5.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b5.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -346,11 +356,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b6.getText().toString());
                 if (number == counter) {
-                    b6.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b6.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b6.setEnabled(false);
                 } else {
-                    b6.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b6.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -363,11 +373,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b7.getText().toString());
                 if (number == counter) {
-                    b7.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b7.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b7.setEnabled(false);
                 } else {
-                    b7.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b7.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -380,11 +390,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b8.getText().toString());
                 if (number == counter) {
-                    b8.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b8.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b8.setEnabled(false);
                 } else {
-                    b8.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b8.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
@@ -397,11 +407,11 @@ public class OrderNumbers extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b9.getText().toString());
                 if (number == counter) {
-                    b9.setBackgroundColor(Color.parseColor("#00FF00"));
+                    b9.setBackgroundResource(R.drawable.menubutton);
                     counter++;
                     b9.setEnabled(false);
                 } else {
-                    b9.setBackgroundColor(Color.parseColor("#FF0000"));
+                    b9.setBackgroundResource(R.drawable.redbtn);
                     gameover("Wrong");
                 }
                 if (counter == 9)
