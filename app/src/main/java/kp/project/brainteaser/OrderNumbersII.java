@@ -13,19 +13,16 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-public class OrderNumbers extends AppCompatActivity {
+public class OrderNumbersII extends AppCompatActivity {
 
     ScoreHelper scoreDB;
     int counter = 1;
-    Button b1, b2, b3, b4, b5, b6, b7, b8, b9, start, pause;
-       List<Integer> numbers;
+    Button b1, b2, b3, b4, b5, b6, b7, b8, b9,b10,b11,b12,b13,b14,b15,b16,start, pause;
+    List<Integer> numbers;
     int score = 0;
     TextView result;
     ProgressBar timeBar;
@@ -41,7 +38,7 @@ public class OrderNumbers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_numbers);
+        setContentView(R.layout.activity_order_numbers_ii);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getInt("ID");
@@ -69,16 +66,14 @@ public class OrderNumbers extends AppCompatActivity {
         b7 = (Button) findViewById(R.id.button7);
         b8 = (Button) findViewById(R.id.button8);
         b9 = (Button) findViewById(R.id.button9);
+        b10 = (Button) findViewById(R.id.button10);
+        b11 = (Button) findViewById(R.id.button11);
+        b12 = (Button) findViewById(R.id.button12);
+        b13 = (Button) findViewById(R.id.button13);
+        b14 = (Button) findViewById(R.id.button14);
+        b15 = (Button) findViewById(R.id.button15);
+        b16 = (Button) findViewById(R.id.button16);
         start = (Button) findViewById(R.id.startButton);
-        b1.setBackgroundResource(R.drawable.graybtn);
-        b2.setBackgroundResource(R.drawable.graybtn);
-        b3.setBackgroundResource(R.drawable.graybtn);
-        b4.setBackgroundResource(R.drawable.graybtn);
-        b5.setBackgroundResource(R.drawable.graybtn);
-        b6.setBackgroundResource(R.drawable.graybtn);
-        b7.setBackgroundResource(R.drawable.graybtn);
-        b8.setBackgroundResource(R.drawable.graybtn);
-        b9.setBackgroundResource(R.drawable.graybtn);
         pause = (Button)findViewById(R.id.playPauseButton);
         pause.setVisibility(View.INVISIBLE);
         result = (TextView)findViewById(R.id.result);
@@ -90,7 +85,6 @@ public class OrderNumbers extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start();
-
                 game();
             }
         });
@@ -123,7 +117,7 @@ public class OrderNumbers extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(OrderNumbers.this);
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(OrderNumbersII.this);
                 pauseMenu
 
                         .setMessage("Game Paused")
@@ -137,7 +131,7 @@ public class OrderNumbers extends AppCompatActivity {
                         .setNegativeButton("Next", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), TwoPairs.class);
+                                Intent i = new Intent(getApplicationContext(), WordGameII.class);
                                 i.putExtra("ID",userID);
                                 i.putExtra("Name",name);
                                 startActivity(i);
@@ -167,7 +161,7 @@ public class OrderNumbers extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Order Numbers",score);
+            boolean status = scoreDB.create(userID,"Order NumbersII",score);
             if(status)
                 check="Saved";
             else
@@ -177,40 +171,40 @@ public class OrderNumbers extends AppCompatActivity {
             check="Not Saved";
 
 
-        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(OrderNumbers.this);
+        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(OrderNumbersII.this);
         oalertDialogBuilder
 
                 .setMessage("Game Over\nScore: "+score+" "+check)
                 .setCancelable(false)
                 .setPositiveButton("Restart", new DialogInterface.OnClickListener(){
                     @Override
-                     public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         Intent i = getIntent();
                         finish();
                         i.putExtra("ID",userID);
                         i.putExtra("Name",name);
                         startActivity(i);
-                        }
+                    }
                 })
                 .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    Intent i = new Intent(getApplicationContext(), TwoPairs.class);
-                    i.putExtra("ID",userID);
-                    i.putExtra("Name",name);
-                    startActivity(i);
-                }
-            })
-        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                i.putExtra("ID",userID);
-                i.putExtra("Name",name);
-                startActivity(i);
-            }
-        });
+                        Intent i = new Intent(getApplicationContext(), WordGameII.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
         AlertDialog alertDialogBuilder = oalertDialogBuilder.create();
         alertDialogBuilder.show();
     }
@@ -225,6 +219,14 @@ public class OrderNumbers extends AppCompatActivity {
         b7.setEnabled(false);
         b8.setEnabled(false);
         b9.setEnabled(false);
+        b10.setEnabled(false);
+        b11.setEnabled(false);
+        b12.setEnabled(false);
+        b13.setEnabled(false);
+        b14.setEnabled(false);
+        b15.setEnabled(false);
+        b16.setEnabled(false);
+
         if(value.equals("Correct"))
             score++;
         result.setText(value);
@@ -262,8 +264,22 @@ public class OrderNumbers extends AppCompatActivity {
         b8.setBackgroundResource(R.drawable.graybtn);
         b9.setEnabled(true);
         b9.setBackgroundResource(R.drawable.graybtn);
+        b10.setEnabled(true);
+        b10.setBackgroundResource(R.drawable.graybtn);
+        b11.setEnabled(true);
+        b11.setBackgroundResource(R.drawable.graybtn);
+        b12.setEnabled(true);
+        b12.setBackgroundResource(R.drawable.graybtn);
+        b13.setEnabled(true);
+        b13.setBackgroundResource(R.drawable.graybtn);
+        b14.setEnabled(true);
+        b14.setBackgroundResource(R.drawable.graybtn);
+        b15.setEnabled(true);
+        b15.setBackgroundResource(R.drawable.graybtn);
+        b16.setEnabled(true);
+        b16.setBackgroundResource(R.drawable.graybtn);
         numbers = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 17; i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
@@ -276,6 +292,13 @@ public class OrderNumbers extends AppCompatActivity {
         b7.setText("" + numbers.get(6));
         b8.setText("" + numbers.get(7));
         b9.setText("" + numbers.get(8));
+        b10.setText("" + numbers.get(9));
+        b11.setText("" + numbers.get(10));
+        b12.setText("" + numbers.get(11));
+        b13.setText("" + numbers.get(12));
+        b14.setText("" + numbers.get(13));
+        b15.setText("" + numbers.get(14));
+        b16.setText("" + numbers.get(15));
 
         buttons();
 
@@ -297,7 +320,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -317,7 +340,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -338,7 +361,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -359,7 +382,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -379,7 +402,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -399,7 +422,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -420,7 +443,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -441,7 +464,7 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -462,7 +485,154 @@ public class OrderNumbers extends AppCompatActivity {
                     gameover("Wrong");
                     sound.playWrong();
                 }
-                if (counter == 9) {
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b10.getText().toString());
+                if (number == counter) {
+                    b10.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b10.setEnabled(false);
+                } else {
+                    b10.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b11.getText().toString());
+                if (number == counter) {
+                    b11.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b11.setEnabled(false);
+                } else {
+                    b11.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b12.getText().toString());
+                if (number == counter) {
+                    b12.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b12.setEnabled(false);
+                } else {
+                    b12.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b13.getText().toString());
+                if (number == counter) {
+                    b13.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b13.setEnabled(false);
+                } else {
+                    b13.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b14.getText().toString());
+                if (number == counter) {
+                    b14.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b14.setEnabled(false);
+                } else {
+                    b14.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b15.getText().toString());
+                if (number == counter) {
+                    b15.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b15.setEnabled(false);
+                } else {
+                    b15.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
+                    gameover("Correct");
+                    sound.playCorrect();
+
+                }
+
+            }
+        });
+        b16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int number = Integer.parseInt(b16.getText().toString());
+                if (number == counter) {
+                    b16.setBackgroundResource(R.drawable.menubutton);
+                    counter++;
+                    b16.setEnabled(false);
+                } else {
+                    b16.setBackgroundResource(R.drawable.redbtn);
+                    gameover("Wrong");
+                    sound.playWrong();
+                }
+                if (counter == 16) {
                     gameover("Correct");
                     sound.playCorrect();
 
@@ -479,3 +649,4 @@ public class OrderNumbers extends AppCompatActivity {
 
 
 }
+

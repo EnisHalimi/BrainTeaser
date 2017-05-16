@@ -2,7 +2,8 @@ package kp.project.brainteaser;
 
  import android.content.DialogInterface;
         import android.content.Intent;
-        import android.graphics.Color;
+ import android.database.Cursor;
+ import android.graphics.Color;
         import android.os.CountDownTimer;
         import android.support.v7.app.AlertDialog;
         import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class SwitchColors extends AppCompatActivity {
     String name;
     int count=0;
     String textColor;
+    SoundPlayer sound;
+    OptionsHelper opDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,19 @@ public class SwitchColors extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
+        opDB = new OptionsHelper(this);
+        Cursor res = opDB.getData();
+        if(res.getCount()== 0)
+            return;
+        float soundvolume = 0;
+        while(res.moveToNext())
+        {
+            if(res.getInt(2) == 1)
+                soundvolume = 1;
+            else
+                soundvolume = 0;
+        }
+        sound = new SoundPlayer(this,soundvolume);
         scoreDB = new ScoreHelper(this);
         start = (Button) findViewById(R.id.startButton);
         b1 = (Button) findViewById(R.id.button);
@@ -245,11 +261,12 @@ public class SwitchColors extends AppCompatActivity {
                 String textButtonColor=b1.getText().toString();
                 if(textColor.equals(textButtonColor)){
                     score++;
+                    sound.playCorrect();
                     result.setText("Correct");
                     b1.setBackgroundResource(R.drawable.menubutton);
                 }
                 else {
-
+                    sound.playWrong();
                     b1.setBackgroundResource(R.drawable.redbtn);
                     result.setText("Wrong");
                 }
@@ -272,6 +289,7 @@ public class SwitchColors extends AppCompatActivity {
                 String textButtonColor=b2.getText().toString();
                 if(textColor.equals(textButtonColor)){
                     score++;
+                    sound.playCorrect();
                     result.setText("Correct");
                     b2.setBackgroundResource(R.drawable.menubutton);
                 }
@@ -279,6 +297,7 @@ public class SwitchColors extends AppCompatActivity {
 
                     b2.setBackgroundResource(R.drawable.redbtn);
                     result.setText("Wrong");
+                    sound.playWrong();
                 }
                 count=0;
                 android.os.Handler handler = new android.os.Handler();
@@ -298,6 +317,7 @@ public class SwitchColors extends AppCompatActivity {
                 b3.setEnabled(false);
                                 String textButtonColor=b3.getText().toString();
                 if(textColor.equals(textButtonColor)){
+                    sound.playCorrect();
                     result.setText("Correct");
                     score++;
                     b3.setBackgroundResource(R.drawable.menubutton);
@@ -306,6 +326,7 @@ public class SwitchColors extends AppCompatActivity {
 
                     b3.setBackgroundResource(R.drawable.redbtn);
                     result.setText("Wrong");
+                    sound.playWrong();
                 }
                 count=0;
                 android.os.Handler handler = new android.os.Handler();

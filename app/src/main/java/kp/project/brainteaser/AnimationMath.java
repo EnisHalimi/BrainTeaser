@@ -2,6 +2,7 @@ package kp.project.brainteaser;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -35,6 +36,8 @@ public class AnimationMath extends AppCompatActivity {
     long secondsleft = 60000;
     int userID;
     String name;
+    SoundPlayer sound;
+    OptionsHelper opDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,19 @@ public class AnimationMath extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
+        opDB = new OptionsHelper(this);
+        Cursor res = opDB.getData();
+        if(res.getCount()== 0)
+            return;
+        float soundvolume = 0;
+        while(res.moveToNext())
+        {
+            if(res.getInt(2) == 1)
+                soundvolume = 1;
+            else
+                soundvolume = 0;
+        }
+        sound = new SoundPlayer(this,soundvolume);
         t1 = (TextView) findViewById(R.id.result);
         i1 = (ImageView) findViewById(R.id.firstImage);
         i2 = (ImageView ) findViewById(R.id.secondImage);
@@ -198,10 +214,12 @@ public class AnimationMath extends AppCompatActivity {
                     score++;
                     first.setBackgroundResource(R.drawable.menubutton);
                     t1.setText("Correct");
+                    sound.playCorrect();
 
                 }
                 else
                 {
+                    sound.playWrong();
                     t1.setText("Wrong");
                     first.setBackgroundResource(R.drawable.redbtn);
                 }
@@ -224,6 +242,7 @@ public class AnimationMath extends AppCompatActivity {
                 int nr = Integer.parseInt(second.getText().toString());
                 if(nr == result)
                 {
+                    sound.playCorrect();
                     t1.setText("Correct");
                     score++;
                     second.setBackgroundResource(R.drawable.menubutton);
@@ -231,6 +250,7 @@ public class AnimationMath extends AppCompatActivity {
                 }
                 else
                 {
+                    sound.playWrong();
                     t1.setText("Wrong");
                     second.setBackgroundResource(R.drawable.redbtn);
                 }
@@ -253,6 +273,7 @@ public class AnimationMath extends AppCompatActivity {
                 int nr = Integer.parseInt(third.getText().toString());
                 if(nr == result)
                 {
+                    sound.playCorrect();
                     score++;
                     t1.setText("Correct");
                     third.setBackgroundResource(R.drawable.menubutton);
@@ -260,6 +281,7 @@ public class AnimationMath extends AppCompatActivity {
                 }
                 else
                 {
+                    sound.playWrong();
                     t1.setText("Wrong");
                     third.setBackgroundResource(R.drawable.redbtn);
                 }

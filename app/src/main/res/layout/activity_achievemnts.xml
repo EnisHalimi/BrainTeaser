@@ -1,19 +1,729 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orderNumbersLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kp.project.brainteaser.Achievements"
-    tools:layout_editor_absoluteY="25dp"
-    tools:layout_editor_absoluteX="0dp">
+    android:background="@drawable/background"
+    android:gravity="top|center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="1"
+    tools:context="kp.project.brainteaser.OrderNumbers">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="182dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blackboard"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingTop="35dp">
+
+            <TableLayout
+                android:id="@+id/niveli1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Niveli i I"
+                        android:textColor="@color/White"
+                        android:textSize="23sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Player"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Score"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Game"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Test"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/niveli2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Niveli i II"
+                        android:textColor="@color/White"
+                        android:textSize="23sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/nameII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Player"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/scoreII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Score"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/gameII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Game"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name1II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Test"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game1II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score1II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name2II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game2II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score2II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name3II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game3II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score3II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name4II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game4II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score4II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name5II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game5II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score5II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name6II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game6II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score6II"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/niveli3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewIII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Niveli i III"
+                        android:textColor="@color/White"
+                        android:textSize="23sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/nameIII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Player"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/scoreIII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Score"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/gameIII"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Game"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name1III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="Test"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game1III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score1III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name2III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game2III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score2III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name3III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game3III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score3III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name4III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game4III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score4III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name5III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game5III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score5III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/name6III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/game6III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/score6III"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

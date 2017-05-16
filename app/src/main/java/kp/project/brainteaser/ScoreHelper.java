@@ -56,4 +56,12 @@ public class ScoreHelper  extends SQLiteOpenHelper {
         return res;
 
     }
+
+    public Cursor getScore(int user,String game)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE user_id='"+user+"' AND game='"+game+"' ORDER BY score DESC LIMIT 1  ", null);
+        return res;
+    }
+
 }

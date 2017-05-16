@@ -10,35 +10,39 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class WordGame extends AppCompatActivity {
-    TextView text;
-    Button b1,b2,b3,start,pause;
-    ArrayList<String> words;
+public class AnimationMathII extends AppCompatActivity {
+
+    ScoreHelper scoreDB;
+    TextView t1;
+    ImageView i1,i2,i3;
+    Button first,second,third, start,pause;
+    Animation horizontal,vertical,diagonal;
+    ArrayList<Integer> numbers;
+    int result;
     int score = 0;
-    TextView result;
     ProgressBar timeBar;
     CountDownTimer timer;
     long secondsleft = 60000;
     int userID;
     String name;
-    ScoreHelper scoreDB;
     SoundPlayer sound;
     OptionsHelper opDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_game);
+        setContentView(R.layout.activity_animation_math_ii);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getInt("ID");
@@ -57,33 +61,40 @@ public class WordGame extends AppCompatActivity {
                 soundvolume = 0;
         }
         sound = new SoundPlayer(this,soundvolume);
-        text = (TextView)findViewById(R.id.text);
-        b1 = (Button) findViewById(R.id.first);
-        b2 = (Button) findViewById(R.id.second);
-        b3 = (Button) findViewById(R.id.third);
-        words = new ArrayList<>();
+        t1 = (TextView) findViewById(R.id.result);
+        i1 = (ImageView) findViewById(R.id.firstImage);
+        i2 = (ImageView ) findViewById(R.id.secondImage);
+        i3 = (ImageView) findViewById(R.id.thirdImage);
+        first = (Button) findViewById(R.id.firstAnswer);
+        second = (Button) findViewById(R.id.secondAnswer);
+        third = (Button) findViewById(R.id.thirdAnswer);
+        numbers = new ArrayList<>();
+        horizontal = AnimationUtils.loadAnimation(this, R.anim.horizontalmove);
+        vertical = AnimationUtils.loadAnimation(this, R.anim.verticalmove);
+        diagonal = AnimationUtils.loadAnimation(this, R.anim.diagonalmove);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
         timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
         scoreDB = new ScoreHelper(this);
-        result = (TextView) findViewById(R.id.result);
         start = (Button) findViewById(R.id.startButton);
         pause = (Button) findViewById(R.id.playPauseButton);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addWords();
                 start();
                 game();
             }
         });
 
-    }
 
+    }
     public void start() {
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
         pause();
+        i2.startAnimation(horizontal);
+        i1.startAnimation(vertical);
+        i3.startAnimation(diagonal);
         long millisInFuture = secondsleft;
         long countDownInterval = 1000;
         timer = new CountDownTimer(millisInFuture, countDownInterval) {
@@ -105,7 +116,7 @@ public class WordGame extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGame.this);
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMathII.this);
                 pauseMenu
 
                         .setMessage("Game Paused")
@@ -116,15 +127,7 @@ public class WordGame extends AppCompatActivity {
                                 start();
                             }
                         })
-                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), LogicalMath.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        })
+
                         .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -144,10 +147,11 @@ public class WordGame extends AppCompatActivity {
 
     public void stop()
     {
+
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Word Game",score);
+            boolean status = scoreDB.create(userID,"Animation Maths",score);
             if(status)
                 check="Saved";
             else
@@ -157,10 +161,10 @@ public class WordGame extends AppCompatActivity {
             check="Not Saved";
 
 
-        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(WordGame.this);
+        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(AnimationMathII.this);
         oalertDialogBuilder
 
-                .setMessage("Game Over\nScore: "+score+" "+check)
+                .setMessage("Game Over\nScore: "+score+" "+check+"\nCongrats on finishing the first level")
                 .setCancelable(false)
                 .setPositiveButton("Restart", new DialogInterface.OnClickListener(){
                     @Override
@@ -172,16 +176,7 @@ public class WordGame extends AppCompatActivity {
                         startActivity(i);
                     }
                 })
-                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                        Intent i = new Intent(getApplicationContext(), LogicalMath.class);
-                        i.putExtra("ID",userID);
-                        i.putExtra("Name",name);
-                        startActivity(i);
-                    }
-                })
                 .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -195,35 +190,39 @@ public class WordGame extends AppCompatActivity {
         alertDialogBuilder.show();
     }
 
+
     public void game()
     {
-        result.setText("");
-        b1.setBackgroundResource(R.drawable.graybtn);
-        b2.setBackgroundResource(R.drawable.graybtn);
-        b3.setBackgroundResource(R.drawable.graybtn);
-        b1.setEnabled(true);
-        b2.setEnabled(true);
-        b3.setEnabled(true);
-        shuffleWords();
-        b1.setOnClickListener(new View.OnClickListener() {
+        t1.setText("");
+        first.setBackgroundResource(R.drawable.graybtn);
+        second.setBackgroundResource(R.drawable.graybtn);
+        third.setBackgroundResource(R.drawable.graybtn);
+        first.setEnabled(true);
+        second.setEnabled(true);
+        third.setEnabled(true);
+        addNumbers();
+        first.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b1.getTag().equals(text.getTag()))
+            public void onClick(View v)
+            {
+                first.setEnabled(false);
+                second.setEnabled(false);
+                third.setEnabled(false);
+                int nr = Integer.parseInt(first.getText().toString());
+                if(nr == result)
                 {
                     score++;
-                    result.setText("Correct");
+                    first.setBackgroundResource(R.drawable.menubutton);
+                    t1.setText("Correct");
                     sound.playCorrect();
-                    b1.setBackgroundResource(R.drawable.menubutton);
+
                 }
-
-                else{
+                else
+                {
                     sound.playWrong();
-                    result.setText("Wrong");
-                    b1.setBackgroundResource(R.drawable.redbtn);}
-
+                    t1.setText("Wrong");
+                    first.setBackgroundResource(R.drawable.redbtn);
+                }
                 Handler handler = new android.os.Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -233,23 +232,28 @@ public class WordGame extends AppCompatActivity {
                 },1000);
             }
         });
-        b2.setOnClickListener(new View.OnClickListener() {
+        second.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b2.getTag().equals(text.getTag()))
+            public void onClick(View v)
+            {
+                first.setEnabled(false);
+                second.setEnabled(false);
+                third.setEnabled(false);
+                int nr = Integer.parseInt(second.getText().toString());
+                if(nr == result)
                 {
                     sound.playCorrect();
+                    t1.setText("Correct");
                     score++;
-                    b2.setBackgroundResource(R.drawable.menubutton);
-                    result.setText("Correct");
+                    second.setBackgroundResource(R.drawable.menubutton);
+
                 }
-                else{
+                else
+                {
                     sound.playWrong();
-                    result.setText("Wrong");
-                    b2.setBackgroundResource(R.drawable.redbtn);}
+                    t1.setText("Wrong");
+                    second.setBackgroundResource(R.drawable.redbtn);
+                }
                 Handler handler = new android.os.Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -259,25 +263,27 @@ public class WordGame extends AppCompatActivity {
                 },1000);
             }
         });
-        b3.setOnClickListener(new View.OnClickListener() {
+        third.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b3.getTag().equals(text.getTag()))
+            public void onClick(View v)
+            {
+                first.setEnabled(false);
+                second.setEnabled(false);
+                third.setEnabled(false);
+                int nr = Integer.parseInt(third.getText().toString());
+                if(nr == result)
                 {
                     sound.playCorrect();
                     score++;
-                    b3.setBackgroundResource(R.drawable.menubutton);
-                    result.setText("Correct");
-
+                    t1.setText("Correct");
+                    third.setBackgroundResource(R.drawable.menubutton);
 
                 }
-                else {
+                else
+                {
                     sound.playWrong();
-                    result.setText("Wrong");
-                    b3.setBackgroundResource(R.drawable.redbtn);
+                    t1.setText("Wrong");
+                    third.setBackgroundResource(R.drawable.redbtn);
                 }
                 Handler handler = new android.os.Handler();
                 handler.postDelayed(new Runnable() {
@@ -290,64 +296,76 @@ public class WordGame extends AppCompatActivity {
         });
     }
 
-    public void addWords()
+    public void addNumbers()
     {
-        words.add("Sun");
-        words.add("Moon");
-        words.add("Football");
-        words.add("Game");
-        words.add("Brain");
-        words.add("Mother");
-        words.add("Father");
-        words.add("Sister");
-        words.add("Brother");
-        words.add("Mobile");
-        words.add("Computer");
-        shuffleWords();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        Collections.shuffle(numbers);
+        result = numbers.get(0) + numbers.get(1) + numbers.get(2);
+        if(numbers.get(0)== 1)
+            i1.setImageResource(R.drawable.num1);
+        if(numbers.get(0)== 2)
+            i1.setImageResource(R.drawable.num2);
+        if(numbers.get(0)== 3)
+            i1.setImageResource(R.drawable.num3);
+        if(numbers.get(0)== 4)
+            i1.setImageResource(R.drawable.num4);
+        if(numbers.get(0)== 5)
+            i1.setImageResource(R.drawable.num5);
+        if(numbers.get(0)== 6)
+            i1.setImageResource(R.drawable.num6);
+        if(numbers.get(1)== 1)
+            i2.setImageResource(R.drawable.num1);
+        if(numbers.get(1)== 2)
+            i2.setImageResource(R.drawable.num2);
+        if(numbers.get(1)== 3)
+            i2.setImageResource(R.drawable.num3);
+        if(numbers.get(1)== 4)
+            i2.setImageResource(R.drawable.num4);
+        if(numbers.get(1)== 5)
+            i2.setImageResource(R.drawable.num5);
+        if(numbers.get(1)== 6)
+            i2.setImageResource(R.drawable.num6);
+        if(numbers.get(2)== 1)
+            i3.setImageResource(R.drawable.num1);
+        if(numbers.get(2)== 2)
+            i3.setImageResource(R.drawable.num2);
+        if(numbers.get(2)== 3)
+            i3.setImageResource(R.drawable.num3);
+        if(numbers.get(2)== 4)
+            i3.setImageResource(R.drawable.num4);
+        if(numbers.get(2)== 5)
+            i3.setImageResource(R.drawable.num5);
+        if(numbers.get(2)== 6)
+            i3.setImageResource(R.drawable.num6);
+        assignbuttons();
     }
 
-    public void shuffleWords()
+    public void assignbuttons()
     {
-        Collections.shuffle(words);
-        Random nr = new Random();
-        b1.setText(words.get(0));
-        b1.setTag("0");
-        b2.setText(words.get(1));
-        b2.setTag("1");
-        b3.setText(words.get(2));
-        b3.setTag("2");
-        int number = nr.nextInt(3);
-        if(number == 0)
-            text.setTag("0");
-        else if(number == 1)
-            text.setTag("1");
-        else
-            text.setTag("2");
-        text.setText(shuffleLetters(words.get(number).toLowerCase()));
-    }
-
-    public String shuffleLetters(String word)
-    {
-        String[] text = word.split("");
-        Random random=new Random();
-        for (int i=0;i<text.length;i++){
-            String temp=text[i];
-            int index=random.nextInt(text.length);
-            text[i]=text[index];
-            text[index]=temp;
+        Random r1 = new Random();
+        int nr = r1.nextInt(3);
+        if(nr==0) {
+            first.setText("" + result);
+            second.setText(""+(result+1));
+            third.setText(""+(result-2));
         }
-        StringBuffer fin = new StringBuffer();
-        for(String s: text)
+        else if (nr==1)
         {
-            fin.append(s);
+            first.setText("" + (result-1));
+            second.setText("" + result);
+            third.setText(""+(result+2));
         }
-        return fin.toString();
-    }
-
-    public void onBackPressed()
-    {
-        return;
+        else
+        {
+            first.setText("" + (result-2));
+            second.setText(""+(result+1));
+            third.setText("" + result);
+        }
     }
 
 }
-

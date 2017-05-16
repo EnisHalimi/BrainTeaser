@@ -36,7 +36,11 @@
         <activity android:name=".SwitchColors" />
         <activity android:name=".Achievements" />
         <activity android:name=".WordGame" />
-        <activity android:name=".AnimationMath"></activity>
+        <activity android:name=".AnimationMath" />
+        <activity android:name=".LogicalMath" />
+        <activity android:name=".OrderNumbersII" />
+        <activity android:name=".WordGameII" />
+        <activity android:name=".AnimationMathII"></activity>
     </application>
 
 </manifest>

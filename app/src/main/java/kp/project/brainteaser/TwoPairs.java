@@ -2,6 +2,7 @@ package kp.project.brainteaser;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,8 @@ public class TwoPairs extends AppCompatActivity {
     int userID;
     String name;
     Button pause;
+    SoundPlayer sound;
+    OptionsHelper opDB;
 
 
     @Override
@@ -53,6 +56,19 @@ public class TwoPairs extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
+        opDB = new OptionsHelper(this);
+        Cursor res = opDB.getData();
+        if(res.getCount()== 0)
+            return;
+        float soundvolume = 0;
+        while(res.moveToNext())
+        {
+            if(res.getInt(2) == 1)
+                soundvolume = 1;
+            else
+                soundvolume = 0;
+        }
+        sound = new SoundPlayer(this,soundvolume);
         t1 = (TextView) findViewById(R.id.result);
 
         pause = (Button)findViewById(R.id.playPauseButton);
@@ -335,7 +351,8 @@ public class TwoPairs extends AppCompatActivity {
 
             }
             //add points
-            playerPoins+=2;
+            playerPoins+=5;
+            sound.playCorrect();
 
         }else{
             iv_11.setImageResource(R.drawable.question);
@@ -351,6 +368,8 @@ public class TwoPairs extends AppCompatActivity {
             iv_33.setImageResource(R.drawable.question);
             iv_34.setImageResource(R.drawable.question);
             //ndryshon radhen e lojtareve
+            playerPoins--;
+            sound.playWrong();
         }
 
         iv_11.setEnabled(true);

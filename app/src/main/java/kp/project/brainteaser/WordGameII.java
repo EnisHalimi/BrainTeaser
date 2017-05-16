@@ -14,15 +14,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class WordGame extends AppCompatActivity {
+public class WordGameII extends AppCompatActivity {
     TextView text;
-    Button b1,b2,b3,start,pause;
+    Button b1,b2,b3,b4,start,pause;
     ArrayList<String> words;
     int score = 0;
     TextView result;
@@ -38,7 +36,7 @@ public class WordGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_game);
+        setContentView(R.layout.activity_word_game_ii);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getInt("ID");
@@ -61,6 +59,7 @@ public class WordGame extends AppCompatActivity {
         b1 = (Button) findViewById(R.id.first);
         b2 = (Button) findViewById(R.id.second);
         b3 = (Button) findViewById(R.id.third);
+        b4 = (Button) findViewById(R.id.fourth);
         words = new ArrayList<>();
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
@@ -105,7 +104,7 @@ public class WordGame extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGame.this);
+                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGameII.this);
                 pauseMenu
 
                         .setMessage("Game Paused")
@@ -147,7 +146,7 @@ public class WordGame extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Word Game",score);
+            boolean status = scoreDB.create(userID,"Word GameII",score);
             if(status)
                 check="Saved";
             else
@@ -157,7 +156,7 @@ public class WordGame extends AppCompatActivity {
             check="Not Saved";
 
 
-        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(WordGame.this);
+        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(WordGameII.this);
         oalertDialogBuilder
 
                 .setMessage("Game Over\nScore: "+score+" "+check)
@@ -201,9 +200,11 @@ public class WordGame extends AppCompatActivity {
         b1.setBackgroundResource(R.drawable.graybtn);
         b2.setBackgroundResource(R.drawable.graybtn);
         b3.setBackgroundResource(R.drawable.graybtn);
+        b4.setBackgroundResource(R.drawable.graybtn);
         b1.setEnabled(true);
         b2.setEnabled(true);
         b3.setEnabled(true);
+        b4.setEnabled(true);
         shuffleWords();
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,11 +212,12 @@ public class WordGame extends AppCompatActivity {
                 b1.setEnabled(false);
                 b2.setEnabled(false);
                 b3.setEnabled(false);
+                b4.setEnabled(false);
                 if(b1.getTag().equals(text.getTag()))
                 {
+                    sound.playCorrect();
                     score++;
                     result.setText("Correct");
-                    sound.playCorrect();
                     b1.setBackgroundResource(R.drawable.menubutton);
                 }
 
@@ -239,6 +241,7 @@ public class WordGame extends AppCompatActivity {
                 b1.setEnabled(false);
                 b2.setEnabled(false);
                 b3.setEnabled(false);
+                b4.setEnabled(false);
                 if(b2.getTag().equals(text.getTag()))
                 {
                     sound.playCorrect();
@@ -265,19 +268,48 @@ public class WordGame extends AppCompatActivity {
                 b1.setEnabled(false);
                 b2.setEnabled(false);
                 b3.setEnabled(false);
+                b4.setEnabled(false);
                 if(b3.getTag().equals(text.getTag()))
                 {
-                    sound.playCorrect();
                     score++;
                     b3.setBackgroundResource(R.drawable.menubutton);
                     result.setText("Correct");
-
+                    sound.playCorrect();
 
                 }
                 else {
                     sound.playWrong();
                     result.setText("Wrong");
                     b3.setBackgroundResource(R.drawable.redbtn);
+                }
+                Handler handler = new android.os.Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        game();
+                    }
+                },1000);
+            }
+        });
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b1.setEnabled(false);
+                b2.setEnabled(false);
+                b3.setEnabled(false);
+                b4.setEnabled(false);
+                if(b4.getTag().equals(text.getTag()))
+                {
+                    score++;
+                    b4.setBackgroundResource(R.drawable.menubutton);
+                    result.setText("Correct");
+                    sound.playCorrect();
+
+                }
+                else {
+                    sound.playWrong();
+                    result.setText("Wrong");
+                    b4.setBackgroundResource(R.drawable.redbtn);
                 }
                 Handler handler = new android.os.Handler();
                 handler.postDelayed(new Runnable() {
@@ -303,7 +335,29 @@ public class WordGame extends AppCompatActivity {
         words.add("Brother");
         words.add("Mobile");
         words.add("Computer");
-        shuffleWords();
+        words.add("Through");
+        words.add("Great");
+        words.add("Much");
+        words.add("Before");
+        words.add("Cause");
+        words.add("Differ");
+        words.add("Against");
+        words.add("Pattern");
+        words.add("Center");
+        words.add("Money");
+        words.add("Person");
+        words.add("Sentence");
+        words.add("Home ");
+        words.add("Power");
+        words.add("Certain");
+        words.add("Science");
+        words.add("Govern");
+        words.add("Machine");
+        words.add("Dark");
+        words.add("Figure");
+        words.add("Toward");
+        words.add("Simple");
+         shuffleWords();
     }
 
     public void shuffleWords()
@@ -316,13 +370,17 @@ public class WordGame extends AppCompatActivity {
         b2.setTag("1");
         b3.setText(words.get(2));
         b3.setTag("2");
-        int number = nr.nextInt(3);
+        b4.setText(words.get(3));
+        b4.setTag("3");
+        int number = nr.nextInt(4);
         if(number == 0)
             text.setTag("0");
         else if(number == 1)
             text.setTag("1");
-        else
+        else if(number == 2)
             text.setTag("2");
+        else
+            text.setTag("3");
         text.setText(shuffleLetters(words.get(number).toLowerCase()));
     }
 
@@ -350,4 +408,3 @@ public class WordGame extends AppCompatActivity {
     }
 
 }
-
