@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -25,9 +26,9 @@ public class AnimationMathII extends AppCompatActivity {
 
     ScoreHelper scoreDB;
     TextView t1;
-    ImageView i1,i2,i3;
+    ImageView i1,i2,i3,i4;
     Button first,second,third, start,pause;
-    Animation horizontal,vertical,diagonal;
+    Animation horizontal,vertical,diagonal,fade;
     ArrayList<Integer> numbers;
     int result;
     int score = 0;
@@ -65,6 +66,7 @@ public class AnimationMathII extends AppCompatActivity {
         i1 = (ImageView) findViewById(R.id.firstImage);
         i2 = (ImageView ) findViewById(R.id.secondImage);
         i3 = (ImageView) findViewById(R.id.thirdImage);
+        i4 = (ImageView) findViewById(R.id.fourthImage);
         first = (Button) findViewById(R.id.firstAnswer);
         second = (Button) findViewById(R.id.secondAnswer);
         third = (Button) findViewById(R.id.thirdAnswer);
@@ -72,6 +74,7 @@ public class AnimationMathII extends AppCompatActivity {
         horizontal = AnimationUtils.loadAnimation(this, R.anim.horizontalmove);
         vertical = AnimationUtils.loadAnimation(this, R.anim.verticalmove);
         diagonal = AnimationUtils.loadAnimation(this, R.anim.diagonalmove);
+        fade = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
         timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -95,6 +98,7 @@ public class AnimationMathII extends AppCompatActivity {
         i2.startAnimation(horizontal);
         i1.startAnimation(vertical);
         i3.startAnimation(diagonal);
+        i4.startAnimation(fade);
         long millisInFuture = secondsleft;
         long countDownInterval = 1000;
         timer = new CountDownTimer(millisInFuture, countDownInterval) {
@@ -151,7 +155,7 @@ public class AnimationMathII extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Animation Maths",score);
+            boolean status = scoreDB.create(userID,"Animation MathsII",score);
             if(status)
                 check="Saved";
             else
@@ -298,14 +302,17 @@ public class AnimationMathII extends AppCompatActivity {
 
     public void addNumbers()
     {
+
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
         numbers.add(4);
         numbers.add(5);
         numbers.add(6);
+        numbers.add(7);
+        numbers.add(8);
         Collections.shuffle(numbers);
-        result = numbers.get(0) + numbers.get(1) + numbers.get(2);
+        result = numbers.get(0) + numbers.get(1) + numbers.get(2)+numbers.get(3);
         if(numbers.get(0)== 1)
             i1.setImageResource(R.drawable.num1);
         if(numbers.get(0)== 2)
@@ -318,6 +325,10 @@ public class AnimationMathII extends AppCompatActivity {
             i1.setImageResource(R.drawable.num5);
         if(numbers.get(0)== 6)
             i1.setImageResource(R.drawable.num6);
+        if(numbers.get(0)==7)
+            i1.setImageResource(R.drawable.num7);
+        if(numbers.get(0)==8)
+            i1.setImageResource(R.drawable.num8);
         if(numbers.get(1)== 1)
             i2.setImageResource(R.drawable.num1);
         if(numbers.get(1)== 2)
@@ -330,6 +341,10 @@ public class AnimationMathII extends AppCompatActivity {
             i2.setImageResource(R.drawable.num5);
         if(numbers.get(1)== 6)
             i2.setImageResource(R.drawable.num6);
+        if(numbers.get(1)==7)
+            i2.setImageResource(R.drawable.num7);
+        if(numbers.get(1)==8)
+            i2.setImageResource(R.drawable.num8);
         if(numbers.get(2)== 1)
             i3.setImageResource(R.drawable.num1);
         if(numbers.get(2)== 2)
@@ -342,6 +357,26 @@ public class AnimationMathII extends AppCompatActivity {
             i3.setImageResource(R.drawable.num5);
         if(numbers.get(2)== 6)
             i3.setImageResource(R.drawable.num6);
+        if(numbers.get(2)==7)
+            i3.setImageResource(R.drawable.num7);
+        if(numbers.get(2)==8)
+            i3.setImageResource(R.drawable.num8);
+        if(numbers.get(3)== 1)
+            i4.setImageResource(R.drawable.num1);
+        if(numbers.get(3)== 2)
+            i4.setImageResource(R.drawable.num2);
+        if(numbers.get(3)== 3)
+            i4.setImageResource(R.drawable.num3);
+        if(numbers.get(3)== 4)
+            i4.setImageResource(R.drawable.num4);
+        if(numbers.get(3)== 5)
+            i4.setImageResource(R.drawable.num5);
+        if(numbers.get(3)== 6)
+            i4.setImageResource(R.drawable.num6);
+        if(numbers.get(3)==7)
+            i4.setImageResource(R.drawable.num7);
+        if(numbers.get(3)==8)
+            i4.setImageResource(R.drawable.num8);
         assignbuttons();
     }
 

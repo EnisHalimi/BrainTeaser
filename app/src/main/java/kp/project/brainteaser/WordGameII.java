@@ -118,7 +118,7 @@ public class WordGameII extends AppCompatActivity {
                         .setNegativeButton("Next", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), LogicalMath.class);
+                                Intent i = new Intent(getApplicationContext(), AnimationMathII.class);
                                 i.putExtra("ID",userID);
                                 i.putExtra("Name",name);
                                 startActivity(i);
@@ -175,7 +175,7 @@ public class WordGameII extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Intent i = new Intent(getApplicationContext(), LogicalMath.class);
+                        Intent i = new Intent(getApplicationContext(), AnimationMathII.class);
                         i.putExtra("ID",userID);
                         i.putExtra("Name",name);
                         startActivity(i);
@@ -347,7 +347,7 @@ public class WordGameII extends AppCompatActivity {
         words.add("Money");
         words.add("Person");
         words.add("Sentence");
-        words.add("Home ");
+        words.add("Home");
         words.add("Power");
         words.add("Certain");
         words.add("Science");

@@ -60,6 +60,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:contentDescription=""
+                    android:elevation="0dp"
                     app:srcCompat="@drawable/num1" />
 
                 <ImageView
@@ -76,6 +77,13 @@
                     android:id="@+id/thirdImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    app:srcCompat="@drawable/num1" />
+
+                <ImageView
+                    android:id="@+id/fourthImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="250dp"
                     app:srcCompat="@drawable/num1" />
 
             </RelativeLayout>
