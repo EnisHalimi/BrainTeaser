@@ -212,7 +212,7 @@ public class AnimationMath extends AppCompatActivity {
                 if(nr == result)
                 {
                     score++;
-                    first.setBackgroundResource(R.drawable.menubutton);
+                    first.setBackgroundResource(R.drawable.button_green);
                     t1.setText("Correct");
                     sound.playCorrect();
 
@@ -245,7 +245,7 @@ public class AnimationMath extends AppCompatActivity {
                     sound.playCorrect();
                     t1.setText("Correct");
                     score++;
-                    second.setBackgroundResource(R.drawable.menubutton);
+                    second.setBackgroundResource(R.drawable.button_green);
 
                 }
                 else
@@ -276,7 +276,7 @@ public class AnimationMath extends AppCompatActivity {
                     sound.playCorrect();
                     score++;
                     t1.setText("Correct");
-                    third.setBackgroundResource(R.drawable.menubutton);
+                    third.setBackgroundResource(R.drawable.button_green);
 
                 }
                 else

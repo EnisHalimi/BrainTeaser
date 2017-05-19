@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -131,6 +130,16 @@ public class AnimationMathII extends AppCompatActivity {
                                 start();
                             }
                         })
+                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
+                                i.putExtra("ID",userID);
+                                i.putExtra("Name",name);
+                                startActivity(i);
+                            }
+                        })
+
 
                         .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
                             @Override
@@ -180,6 +189,15 @@ public class AnimationMathII extends AppCompatActivity {
                         startActivity(i);
                     }
                 })
+                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                })
 
                 .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
@@ -216,7 +234,7 @@ public class AnimationMathII extends AppCompatActivity {
                 if(nr == result)
                 {
                     score++;
-                    first.setBackgroundResource(R.drawable.menubutton);
+                    first.setBackgroundResource(R.drawable.button_green);
                     t1.setText("Correct");
                     sound.playCorrect();
 
@@ -249,7 +267,7 @@ public class AnimationMathII extends AppCompatActivity {
                     sound.playCorrect();
                     t1.setText("Correct");
                     score++;
-                    second.setBackgroundResource(R.drawable.menubutton);
+                    second.setBackgroundResource(R.drawable.button_green);
 
                 }
                 else
@@ -280,7 +298,7 @@ public class AnimationMathII extends AppCompatActivity {
                     sound.playCorrect();
                     score++;
                     t1.setText("Correct");
-                    third.setBackgroundResource(R.drawable.menubutton);
+                    third.setBackgroundResource(R.drawable.button_green);
 
                 }
                 else

@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -216,7 +214,7 @@ public class WordGame extends AppCompatActivity {
                     score++;
                     result.setText("Correct");
                     sound.playCorrect();
-                    b1.setBackgroundResource(R.drawable.menubutton);
+                    b1.setBackgroundResource(R.drawable.button_green);
                 }
 
                 else{
@@ -243,7 +241,7 @@ public class WordGame extends AppCompatActivity {
                 {
                     sound.playCorrect();
                     score++;
-                    b2.setBackgroundResource(R.drawable.menubutton);
+                    b2.setBackgroundResource(R.drawable.button_green);
                     result.setText("Correct");
                 }
                 else{
@@ -269,7 +267,7 @@ public class WordGame extends AppCompatActivity {
                 {
                     sound.playCorrect();
                     score++;
-                    b3.setBackgroundResource(R.drawable.menubutton);
+                    b3.setBackgroundResource(R.drawable.button_green);
                     result.setText("Correct");
 
 

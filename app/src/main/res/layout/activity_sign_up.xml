@@ -15,8 +15,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="328dp"
-        android:background="@drawable/blackboard"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background2"
         android:padding="20dp">
 
         <LinearLayout
@@ -32,8 +32,7 @@
                 android:ems="10"
                 android:hint="@string/registerusername"
                 android:inputType="textPersonName"
-                android:textColor="@color/White"
-                 />
+                android:textColor="@color/White" />
 
             <EditText
                 android:id="@+id/registerPassword"

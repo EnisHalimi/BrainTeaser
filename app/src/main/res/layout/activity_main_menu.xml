@@ -12,13 +12,17 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="208dp"
-        android:background="@drawable/blackboard"
+        android:layout_height="200dp"
+        android:background="@drawable/background2"
+        android:foregroundGravity="bottom"
         android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <Button
@@ -28,7 +32,8 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/graybtn"
                 android:text="@string/play"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="19sp" />
 
             <Button
                 android:id="@+id/achivmentsButton"
@@ -38,7 +43,8 @@
                 android:background="@drawable/graybtn"
                 android:text="@string/achievements"
                 android:textAlignment="center"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="19sp" />
 
             <Button
                 android:id="@+id/optionsButton"
@@ -46,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/graybtn"
                 android:text="@string/options"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="19sp" />
 
         </LinearLayout>
     </ScrollView>

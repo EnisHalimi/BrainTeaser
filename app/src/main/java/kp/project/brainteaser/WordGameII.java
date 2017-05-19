@@ -218,7 +218,7 @@ public class WordGameII extends AppCompatActivity {
                     sound.playCorrect();
                     score++;
                     result.setText("Correct");
-                    b1.setBackgroundResource(R.drawable.menubutton);
+                    b1.setBackgroundResource(R.drawable.button_green);
                 }
 
                 else{
@@ -246,7 +246,7 @@ public class WordGameII extends AppCompatActivity {
                 {
                     sound.playCorrect();
                     score++;
-                    b2.setBackgroundResource(R.drawable.menubutton);
+                    b2.setBackgroundResource(R.drawable.button_green);
                     result.setText("Correct");
                 }
                 else{
@@ -272,7 +272,7 @@ public class WordGameII extends AppCompatActivity {
                 if(b3.getTag().equals(text.getTag()))
                 {
                     score++;
-                    b3.setBackgroundResource(R.drawable.menubutton);
+                    b3.setBackgroundResource(R.drawable.button_green);
                     result.setText("Correct");
                     sound.playCorrect();
 
@@ -301,7 +301,7 @@ public class WordGameII extends AppCompatActivity {
                 if(b4.getTag().equals(text.getTag()))
                 {
                     score++;
-                    b4.setBackgroundResource(R.drawable.menubutton);
+                    b4.setBackgroundResource(R.drawable.button_green);
                     result.setText("Correct");
                     sound.playCorrect();
 

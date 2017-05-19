@@ -40,7 +40,8 @@
         <activity android:name=".LogicalMath" />
         <activity android:name=".OrderNumbersII" />
         <activity android:name=".WordGameII" />
-        <activity android:name=".AnimationMathII"></activity>
+        <activity android:name=".AnimationMathII" />
+        <activity android:name=".TwoPairsII"></activity>
     </application>
 
 </manifest>

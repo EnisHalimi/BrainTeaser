@@ -37,7 +37,7 @@
         android:id="@+id/gameLayout"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        android:background="@drawable/blackboard"
+        android:background="@drawable/background2"
         android:padding="25dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
@@ -309,8 +309,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 
 
 </LinearLayout>

@@ -11,12 +11,9 @@ package kp.project.brainteaser;
         import android.view.View;
         import android.widget.Button;
  import android.widget.ProgressBar;
- import android.widget.Switch;
  import android.widget.TextView;
- import android.widget.Toast;
 
- import java.lang.reflect.Array;
-        import java.util.Random;
+ import java.util.Random;
 
 public class SwitchColors extends AppCompatActivity {
     int score=0;
@@ -263,7 +260,7 @@ public class SwitchColors extends AppCompatActivity {
                     score++;
                     sound.playCorrect();
                     result.setText("Correct");
-                    b1.setBackgroundResource(R.drawable.menubutton);
+                    b1.setBackgroundResource(R.drawable.button_green);
                 }
                 else {
                     sound.playWrong();
@@ -291,7 +288,7 @@ public class SwitchColors extends AppCompatActivity {
                     score++;
                     sound.playCorrect();
                     result.setText("Correct");
-                    b2.setBackgroundResource(R.drawable.menubutton);
+                    b2.setBackgroundResource(R.drawable.button_green);
                 }
                 else {
 
@@ -320,7 +317,7 @@ public class SwitchColors extends AppCompatActivity {
                     sound.playCorrect();
                     result.setText("Correct");
                     score++;
-                    b3.setBackgroundResource(R.drawable.menubutton);
+                    b3.setBackgroundResource(R.drawable.button_green);
                 }
                 else {
 

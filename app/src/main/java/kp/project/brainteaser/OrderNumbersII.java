@@ -312,7 +312,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b1.getText().toString());
                 if (number == counter) {
-                    b1.setBackgroundResource(R.drawable.menubutton);
+                    b1.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b1.setEnabled(false);
                 } else {
@@ -332,7 +332,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b2.getText().toString());
                 if (number == counter) {
-                    b2.setBackgroundResource(R.drawable.menubutton);
+                    b2.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b2.setEnabled(false);
                 } else {
@@ -353,7 +353,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b3.getText().toString());
                 if (number == counter) {
-                    b3.setBackgroundResource(R.drawable.menubutton);
+                    b3.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b3.setEnabled(false);
                 } else {
@@ -374,7 +374,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b4.getText().toString());
                 if (number == counter) {
-                    b4.setBackgroundResource(R.drawable.menubutton);
+                    b4.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b4.setEnabled(false);
                 } else {
@@ -394,7 +394,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b5.getText().toString());
                 if (number == counter) {
-                    b5.setBackgroundResource(R.drawable.menubutton);
+                    b5.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b5.setEnabled(false);
                 } else {
@@ -414,7 +414,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b6.getText().toString());
                 if (number == counter) {
-                    b6.setBackgroundResource(R.drawable.menubutton);
+                    b6.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b6.setEnabled(false);
                 } else {
@@ -435,7 +435,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b7.getText().toString());
                 if (number == counter) {
-                    b7.setBackgroundResource(R.drawable.menubutton);
+                    b7.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b7.setEnabled(false);
                 } else {
@@ -456,7 +456,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b8.getText().toString());
                 if (number == counter) {
-                    b8.setBackgroundResource(R.drawable.menubutton);
+                    b8.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b8.setEnabled(false);
                 } else {
@@ -477,7 +477,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b9.getText().toString());
                 if (number == counter) {
-                    b9.setBackgroundResource(R.drawable.menubutton);
+                    b9.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b9.setEnabled(false);
                 } else {
@@ -498,7 +498,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b10.getText().toString());
                 if (number == counter) {
-                    b10.setBackgroundResource(R.drawable.menubutton);
+                    b10.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b10.setEnabled(false);
                 } else {
@@ -519,7 +519,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b11.getText().toString());
                 if (number == counter) {
-                    b11.setBackgroundResource(R.drawable.menubutton);
+                    b11.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b11.setEnabled(false);
                 } else {
@@ -540,7 +540,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b12.getText().toString());
                 if (number == counter) {
-                    b12.setBackgroundResource(R.drawable.menubutton);
+                    b12.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b12.setEnabled(false);
                 } else {
@@ -561,7 +561,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b13.getText().toString());
                 if (number == counter) {
-                    b13.setBackgroundResource(R.drawable.menubutton);
+                    b13.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b13.setEnabled(false);
                 } else {
@@ -582,7 +582,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b14.getText().toString());
                 if (number == counter) {
-                    b14.setBackgroundResource(R.drawable.menubutton);
+                    b14.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b14.setEnabled(false);
                 } else {
@@ -603,7 +603,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b15.getText().toString());
                 if (number == counter) {
-                    b15.setBackgroundResource(R.drawable.menubutton);
+                    b15.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b15.setEnabled(false);
                 } else {
@@ -624,7 +624,7 @@ public class OrderNumbersII extends AppCompatActivity {
             public void onClick(View v) {
                 int number = Integer.parseInt(b16.getText().toString());
                 if (number == counter) {
-                    b16.setBackgroundResource(R.drawable.menubutton);
+                    b16.setBackgroundResource(R.drawable.button_green);
                     counter++;
                     b16.setEnabled(false);
                 } else {

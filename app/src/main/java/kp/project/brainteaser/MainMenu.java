@@ -39,14 +39,14 @@ public class MainMenu extends AppCompatActivity {
                 Button niveli3 = (Button)findViewById(R.id.niveli3);
 
                 int [] score = getScores("");
-                if(score[0] < 10 || score[1] < 10  || score[2] < 10  || score[3] < 10 ||  score[4] < 7 || score[5] < 5 )
+                /*if(score[0] < 10 || score[1] < 10  || score[2] < 10  || score[3] < 10 ||  score[4] < 7 || score[5] < 5 )
                 {
                     niveli2.setEnabled(false);
                     niveli2.setText("Niveli i 2 (Locked)");
                 }
                 else {
                     niveli2.setEnabled(true);
-                }
+                }*/
                 niveli1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
