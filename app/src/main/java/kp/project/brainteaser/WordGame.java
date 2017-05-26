@@ -19,26 +19,27 @@ import java.util.Collections;
 import java.util.Random;
 
 public class WordGame extends AppCompatActivity {
-    TextView text;
-    Button b1,b2,b3,start,pause;
-    ArrayList<String> words;
-    int score = 0;
-    TextView result;
-    ProgressBar timeBar;
-    CountDownTimer timer;
-    long secondsleft = 60000;
-    int userID;
-    String name;
-    ScoreHelper scoreDB;
-    SoundPlayer sound;
-    OptionsHelper opDB;
+    private TextView text;
+    private Button b1,b2,b3,start,pause;
+    private ArrayList<String> words;
+    private int score = 0;
+    private TextView result;
+    private ProgressBar timeBar;
+    private CountDownTimer timer;
+    private long secondsleft = 60000;
+    private int userID;
+    private String name;
+    private ScoreHelper scoreDB;
+    private SoundPlayer sound;
+    private OptionsHelper opDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_game);
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null)
+        {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
@@ -105,7 +106,6 @@ public class WordGame extends AppCompatActivity {
                 timer.cancel();
                 AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGame.this);
                 pauseMenu
-
                         .setMessage("Game Paused")
                         .setCancelable(false)
                         .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
@@ -139,7 +139,6 @@ public class WordGame extends AppCompatActivity {
 
     }
 
-
     public void stop()
     {
         String check;
@@ -153,9 +152,7 @@ public class WordGame extends AppCompatActivity {
         }
         else
             check="Not Saved";
-
-
-        AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(WordGame.this);
+       AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(WordGame.this);
         oalertDialogBuilder
 
                 .setMessage("Game Over\nScore: "+score+" "+check)
@@ -206,86 +203,48 @@ public class WordGame extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b1.getTag().equals(text.getTag()))
-                {
-                    score++;
-                    result.setText("Correct");
-                    sound.playCorrect();
-                    b1.setBackgroundResource(R.drawable.button_green);
-                }
-
-                else{
-                    sound.playWrong();
-                    result.setText("Wrong");
-                    b1.setBackgroundResource(R.drawable.redbtn);}
-
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(b1);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b2.getTag().equals(text.getTag()))
-                {
-                    sound.playCorrect();
-                    score++;
-                    b2.setBackgroundResource(R.drawable.button_green);
-                    result.setText("Correct");
-                }
-                else{
-                    sound.playWrong();
-                    result.setText("Wrong");
-                    b2.setBackgroundResource(R.drawable.redbtn);}
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(b2);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b1.setEnabled(false);
-                b2.setEnabled(false);
-                b3.setEnabled(false);
-                if(b3.getTag().equals(text.getTag()))
-                {
-                    sound.playCorrect();
-                    score++;
-                    b3.setBackgroundResource(R.drawable.button_green);
-                    result.setText("Correct");
-
-
-                }
-                else {
-                    sound.playWrong();
-                    result.setText("Wrong");
-                    b3.setBackgroundResource(R.drawable.redbtn);
-                }
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(b3);
             }
         });
+    }
+    public void buttonListener(Button b)
+    {
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        if(b.getTag().equals(text.getTag()))
+        {
+            score++;
+            result.setText("Correct");
+            sound.playCorrect();
+            b.setBackgroundResource(R.drawable.button_green);
+        }
+
+        else
+        {
+            sound.playWrong();
+            result.setText("Wrong");
+            b.setBackgroundResource(R.drawable.redbtn);
+        }
+        Handler handler = new android.os.Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                game();
+            }
+        },1000);
     }
 
     public void addWords()

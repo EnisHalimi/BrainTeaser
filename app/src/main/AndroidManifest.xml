@@ -41,7 +41,8 @@
         <activity android:name=".OrderNumbersII" />
         <activity android:name=".WordGameII" />
         <activity android:name=".AnimationMathII" />
-        <activity android:name=".TwoPairsII"></activity>
+        <activity android:name=".TwoPairsII" />
+        <activity android:name=".IQTest"></activity>
     </application>
 
 </manifest>

@@ -67,6 +67,15 @@ public class MainMenu extends AppCompatActivity {
 
                     }
                 });
+                niveli3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), IQTest.class);
+                        i.putExtra("ID", userID);
+                        i.putExtra("Name", user_name);
+                        startActivity(i);
+                    }
+                });
 
             }
         });

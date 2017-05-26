@@ -141,7 +141,6 @@ public class Achievements extends AppCompatActivity {
         score6III.setText(scoresIII[5]+"/20");
     }
 
-
     public int[] getScores(String niveli)
     {
         int [] scores = new int[6];

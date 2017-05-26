@@ -23,28 +23,29 @@ import java.util.Random;
 
 public class AnimationMathII extends AppCompatActivity {
 
-    ScoreHelper scoreDB;
-    TextView t1;
-    ImageView i1,i2,i3,i4;
-    Button first,second,third, start,pause;
-    Animation horizontal,vertical,diagonal,fade;
-    ArrayList<Integer> numbers;
-    int result;
-    int score = 0;
-    ProgressBar timeBar;
-    CountDownTimer timer;
-    long secondsleft = 60000;
-    int userID;
-    String name;
-    SoundPlayer sound;
-    OptionsHelper opDB;
+    private ScoreHelper scoreDB;
+    private TextView t1;
+    private ImageView i1,i2,i3,i4;
+    private Button first,second,third, start,pause;
+    private Animation horizontal,vertical,diagonal,fade;
+    private ArrayList<Integer> numbers;
+    private int result;
+    private int score = 0;
+    private ProgressBar timeBar;
+    private CountDownTimer timer;
+    private long secondsleft = 60000;
+    private int userID;
+    private String name;
+    private SoundPlayer sound;
+    private OptionsHelper opDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation_math_ii);
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null)
+        {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
@@ -87,9 +88,8 @@ public class AnimationMathII extends AppCompatActivity {
                 game();
             }
         });
-
-
     }
+
     public void start() {
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
@@ -121,7 +121,6 @@ public class AnimationMathII extends AppCompatActivity {
                 timer.cancel();
                 AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMathII.this);
                 pauseMenu
-
                         .setMessage("Game Paused")
                         .setCancelable(false)
                         .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
@@ -154,13 +153,10 @@ public class AnimationMathII extends AppCompatActivity {
                 pauseDialog.show();
             }
         });
-
     }
-
 
     public void stop()
     {
-
         String check;
         if(userID != 0)
         {
@@ -172,8 +168,6 @@ public class AnimationMathII extends AppCompatActivity {
         }
         else
             check="Not Saved";
-
-
         AlertDialog.Builder oalertDialogBuilder=new AlertDialog.Builder(AnimationMathII.this);
         oalertDialogBuilder
 
@@ -212,7 +206,6 @@ public class AnimationMathII extends AppCompatActivity {
         alertDialogBuilder.show();
     }
 
-
     public void game()
     {
         t1.setText("");
@@ -227,95 +220,51 @@ public class AnimationMathII extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                first.setEnabled(false);
-                second.setEnabled(false);
-                third.setEnabled(false);
-                int nr = Integer.parseInt(first.getText().toString());
-                if(nr == result)
-                {
-                    score++;
-                    first.setBackgroundResource(R.drawable.button_green);
-                    t1.setText("Correct");
-                    sound.playCorrect();
-
-                }
-                else
-                {
-                    sound.playWrong();
-                    t1.setText("Wrong");
-                    first.setBackgroundResource(R.drawable.redbtn);
-                }
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(first);
             }
         });
         second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                first.setEnabled(false);
-                second.setEnabled(false);
-                third.setEnabled(false);
-                int nr = Integer.parseInt(second.getText().toString());
-                if(nr == result)
-                {
-                    sound.playCorrect();
-                    t1.setText("Correct");
-                    score++;
-                    second.setBackgroundResource(R.drawable.button_green);
-
-                }
-                else
-                {
-                    sound.playWrong();
-                    t1.setText("Wrong");
-                    second.setBackgroundResource(R.drawable.redbtn);
-                }
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(second);
             }
         });
         third.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                first.setEnabled(false);
-                second.setEnabled(false);
-                third.setEnabled(false);
-                int nr = Integer.parseInt(third.getText().toString());
-                if(nr == result)
-                {
-                    sound.playCorrect();
-                    score++;
-                    t1.setText("Correct");
-                    third.setBackgroundResource(R.drawable.button_green);
-
-                }
-                else
-                {
-                    sound.playWrong();
-                    t1.setText("Wrong");
-                    third.setBackgroundResource(R.drawable.redbtn);
-                }
-                Handler handler = new android.os.Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        game();
-                    }
-                },1000);
+                buttonListener(third);
             }
         });
+    }
+
+    public void buttonListener(Button b)
+    {
+        first.setEnabled(false);
+        second.setEnabled(false);
+        third.setEnabled(false);
+        int nr = Integer.parseInt(b.getText().toString());
+        if(nr == result)
+        {
+            sound.playCorrect();
+            score++;
+            t1.setText("Correct");
+            b.setBackgroundResource(R.drawable.button_green);
+        }
+        else
+        {
+            sound.playWrong();
+            t1.setText("Wrong");
+            b.setBackgroundResource(R.drawable.redbtn);
+        }
+        Handler handler = new android.os.Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                game();
+            }
+        },1000);
     }
 
     public void addNumbers()

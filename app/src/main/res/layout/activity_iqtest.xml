@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orderNumbersLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="top|center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="kp.project.brainteaser.IQTest">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background2"
+        android:padding="16dp"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="67dp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="264dp">
+
+                <Button
+                    android:id="@+id/back"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginRight="10dp"
+                    android:layout_row="0"
+                    android:background="@drawable/buttonface"
+                    android:gravity="center"
+                    android:text="Back"
+                    android:textSize="25dp" />
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_row="0"
+                    android:background="@drawable/buttonface"
+                    android:text="Next"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_row="0"
+                    android:background="@drawable/buttonface"
+                    android:elevation="2dp"
+                    android:text="Start"
+                    android:textSize="24sp" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp">
+
+                <ImageView
+                    android:id="@+id/screen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/backgroundface" />
+            </GridLayout>
+
+            <RadioGroup
+                android:id="@+id/group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbarSize="50dp"
+                android:visibility="visible"
+                android:weightSum="1">
+
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="0.15"
+                    android:text="1" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="0.11"
+                    android:text="2" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_weight="0.13"
+                    android:text="3" />
+
+                <RadioButton
+                    android:id="@+id/radio4"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.07"
+                    android:text="4" />
+
+            </RadioGroup>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.34">
+
+                <ImageView
+                    android:id="@+id/fourthAnswer"
+                    android:layout_width="65dp"
+                    android:layout_height="80dp"
+                    android:layout_column="3"
+                    android:layout_row="0"
+                    app:srcCompat="@drawable/iq" />
+
+                <ImageView
+                    android:id="@+id/firstAnswer"
+                    android:layout_width="65dp"
+                    android:layout_height="80dp"
+                    android:layout_column="0"
+                    android:layout_marginRight="10dp"
+                    android:layout_row="0"
+                    app:srcCompat="@drawable/iq" />
+
+                <ImageView
+                    android:id="@+id/secondAnswer"
+                    android:layout_width="65dp"
+                    android:layout_height="80dp"
+                    android:layout_column="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_row="0"
+                    app:srcCompat="@drawable/iq" />
+
+                <ImageView
+                    android:id="@+id/thirdAnswer"
+                    android:layout_width="65dp"
+                    android:layout_height="80dp"
+                    android:layout_column="2"
+                    android:layout_marginRight="10dp"
+                    android:layout_row="0"
+                    app:srcCompat="@drawable/iq" />
+
+            </GridLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

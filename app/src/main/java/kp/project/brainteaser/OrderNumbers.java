@@ -22,19 +22,19 @@ import java.util.List;
 
 public class OrderNumbers extends AppCompatActivity {
 
-    ScoreHelper scoreDB;
-    int counter = 1;
-    Button b1, b2, b3, b4, b5, b6, b7, b8, b9, start, pause;
-       List<Integer> numbers;
-    int score = 0;
-    TextView result;
-    ProgressBar timeBar;
-    CountDownTimer timer;
-    long secondsleft = 60000;
-    int userID;
-    String name;
-    SoundPlayer sound;
-    OptionsHelper opDB;
+    private ScoreHelper scoreDB;
+    private int counter = 1;
+    private Button b1, b2, b3, b4, b5, b6, b7, b8, b9, start, pause;
+    private List<Integer> numbers;
+    private int score = 0;
+    private TextView result;
+    private ProgressBar timeBar;
+    private CountDownTimer timer;
+    private long secondsleft = 60000;
+    private int userID;
+    private String name;
+    private SoundPlayer sound;
+    private OptionsHelper opDB;
 
 
 
@@ -43,7 +43,8 @@ public class OrderNumbers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_numbers);
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras != null)
+        {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
@@ -90,7 +91,6 @@ public class OrderNumbers extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 start();
-
                 game();
             }
         });
@@ -108,7 +108,6 @@ public class OrderNumbers extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeBar.setProgress((int)secondsleft/1000);
                 secondsleft = millisUntilFinished;
-
             }
             @Override
             public void onFinish() {
@@ -150,7 +149,6 @@ public class OrderNumbers extends AppCompatActivity {
                                 i.putExtra("ID",userID);
                                 i.putExtra("Name",name);
                                 startActivity(i);
-
                             }
                         });
                 AlertDialog pauseDialog = pauseMenu.create();
@@ -163,7 +161,6 @@ public class OrderNumbers extends AppCompatActivity {
 
     public void stop()
     {
-
         String check;
         if(userID != 0)
         {
@@ -287,191 +284,78 @@ public class OrderNumbers extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b1.getText().toString());
-                if (number == counter) {
-                    b1.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b1.setEnabled(false);
-                } else {
-                    b1.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
+                buttonListener(b1);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b2.getText().toString());
-                if (number == counter) {
-                    b2.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b2.setEnabled(false);
-                } else {
-                    b2.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b2);
             }
         });
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b3.getText().toString());
-                if (number == counter) {
-                    b3.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b3.setEnabled(false);
-                } else {
-                    b3.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b3);
             }
         });
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b4.getText().toString());
-                if (number == counter) {
-                    b4.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b4.setEnabled(false);
-                } else {
-                    b4.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
+                buttonListener(b4);
             }
         });
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b5.getText().toString());
-                if (number == counter) {
-                    b5.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b5.setEnabled(false);
-                } else {
-                    b5.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
+                buttonListener(b5);
             }
         });
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b6.getText().toString());
-                if (number == counter) {
-                    b6.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b6.setEnabled(false);
-                } else {
-                    b6.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b6);
             }
         });
         b7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b7.getText().toString());
-                if (number == counter) {
-                    b7.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b7.setEnabled(false);
-                } else {
-                    b7.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b7);
             }
         });
         b8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b8.getText().toString());
-                if (number == counter) {
-                    b8.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b8.setEnabled(false);
-                } else {
-                    b8.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b8);
             }
         });
         b9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int number = Integer.parseInt(b9.getText().toString());
-                if (number == counter) {
-                    b9.setBackgroundResource(R.drawable.button_green);
-                    counter++;
-                    b9.setEnabled(false);
-                } else {
-                    b9.setBackgroundResource(R.drawable.redbtn);
-                    gameover("Wrong");
-                    sound.playWrong();
-                }
-                if (counter == 9) {
-                    gameover("Correct");
-                    sound.playCorrect();
-
-                }
-
+                buttonListener(b9);
             }
         });
-
     }
+
+    public void buttonListener(Button b)
+    {
+        int number = Integer.parseInt(b.getText().toString());
+        if (number == counter) {
+            b.setBackgroundResource(R.drawable.button_green);
+            counter++;
+            b.setEnabled(false);
+        } else {
+            b.setBackgroundResource(R.drawable.redbtn);
+            gameover("Wrong");
+            sound.playWrong();
+        }
+        if (counter == 9) {
+            gameover("Correct");
+            sound.playCorrect();
+
+        }
+    }
+
     public void onBackPressed()
     {
         return;
