@@ -100,7 +100,10 @@ public class MainMenu extends AppCompatActivity {
         });
     }
     public void onBackPressed(){
-        return;
+        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+        i.putExtra("ID",userID);
+        i.putExtra("Name",user_name);
+        startActivity(i);
     }
 
     public void setUser()

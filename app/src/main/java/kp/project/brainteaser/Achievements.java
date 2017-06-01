@@ -1,5 +1,6 @@
 package kp.project.brainteaser;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -140,6 +141,15 @@ public class Achievements extends AppCompatActivity {
         score5III.setText(scoresIII[4]+"/20");
         score6III.setText(scoresIII[5]+"/20");
     }
+
+    public void onBackPressed()
+    {
+        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+        i.putExtra("ID",userID);
+        i.putExtra("Name",name);
+        startActivity(i);
+    }
+
 
     public int[] getScores(String niveli)
     {
