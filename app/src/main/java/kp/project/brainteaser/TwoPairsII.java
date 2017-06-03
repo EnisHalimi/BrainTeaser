@@ -20,8 +20,6 @@ public class TwoPairsII extends AppCompatActivity {
     ImageView iv_11,iv_12, iv_13,iv_14,iv_15,iv_21,iv_22,iv_23, iv_24, iv_25, iv_31, iv_32, iv_33, iv_34, iv_35, iv_41,
             iv_42,iv_43, iv_44,iv_45;
     //TextView tv_p1;
-    int image101, image102, image103, image104, image105, image106, image107, image108, image109,
-            image110,image201, image202, image203, image204, image205, image206, image207, image208, image209, image210;
     int array[]=new int[20];
     int firstCard,secondCard;
     int clickedFirst, clickedSecond;
@@ -639,47 +637,26 @@ public class TwoPairsII extends AppCompatActivity {
 
     private void frontOfCardsResources() {
 
-        image101 = R.drawable.f1;
-        image102 = R.drawable.f2;
-        image103 = R.drawable.f3;
-        image104 = R.drawable.f4;
-        image105 = R.drawable.f5;
-        image106 = R.drawable.f6;
-        image107 = R.drawable.f7;
-        image108 = R.drawable.f8;
-        image109 = R.drawable.f9;
-        image110 = R.drawable.f10;
-        image201 = R.drawable.f1;
-        image202 = R.drawable.f2;
-        image203 = R.drawable.f3;
-        image204 = R.drawable.f4;
-        image205 = R.drawable.f5;
-        image206 = R.drawable.f6;
-        image207 = R.drawable.f7;
-        image208 = R.drawable.f8;
-        image209 = R.drawable.f9;
-        image210 = R.drawable.f10;
-
-        array[0]=image101;
-        array[1]=image102;
-        array[2]=image103;
-        array[3]=image104;
-        array[4]=image105;
-        array[5]=image106;
-        array[6]=image107;
-        array[7]=image108;
-        array[8]=image109;
-        array[9]=image110;
-        array[10]=image201;
-        array[11]=image202;
-        array[12]=image203;
-        array[13]=image204;
-        array[14]=image205;
-        array[15]=image206;
-        array[16]=image207;
-        array[17]=image208;
-        array[18]=image209;
-        array[19]=image210;
+        array[0] = R.drawable.f1;
+        array[1] = R.drawable.f2;
+        array[2] = R.drawable.f3;
+        array[3] = R.drawable.f5;
+        array[4] = R.drawable.f4;
+        array[5] = R.drawable.f6;
+        array[6]= R.drawable.f7;
+        array[7] = R.drawable.f8;
+        array[8] = R.drawable.f9;
+        array[9]= R.drawable.f10;
+        array[10] = R.drawable.f1;
+        array[11] = R.drawable.f2;
+        array[12] = R.drawable.f3;
+        array[13] = R.drawable.f4;
+        array[14] = R.drawable.f5;
+        array[15] = R.drawable.f6;
+        array[16] = R.drawable.f7;
+        array[17] = R.drawable.f8;
+        array[18] = R.drawable.f9;
+        array[19] = R.drawable.f10;
 
         shuffleButtonGraphics(array);
     }

@@ -27,6 +27,7 @@ public class IQTest extends AppCompatActivity {
     int userID;
     OptionsHelper opDB;
     SoundPlayer sound;
+    TextView counter;
 
 
     ImageView result1,result2,result3,result4,result5,result6,result7,result8,result9,result10;
@@ -61,6 +62,9 @@ public class IQTest extends AppCompatActivity {
         back=(Button)findViewById(R.id.back);
         submit=(Button)findViewById(R.id.submit);
         next=(Button)findViewById(R.id.next);
+        next.setVisibility(View.INVISIBLE);
+        back.setVisibility(View.INVISIBLE);
+        counter=(TextView)findViewById(R.id.counter);
 
         b1=(RadioButton)findViewById(R.id.radio1);
         b2=(RadioButton)findViewById(R.id.radio2);
@@ -78,6 +82,8 @@ public class IQTest extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submit.setText("Submit");
+                next.setVisibility(View.VISIBLE);
+                back.setVisibility(View.VISIBLE);
                 if(turnoff==1){
                     checkAnswers();
                     gameOver();
@@ -90,16 +96,21 @@ public class IQTest extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 btns.clearCheck();
                 count++;
+                counter.setText((count+1)+"/20");
                 startGame();
+
             }
         });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btns.clearCheck();
                 count--;
+                counter.setText((count+1)+"/20");
                 startGame();
 
             }

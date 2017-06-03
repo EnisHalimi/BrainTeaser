@@ -33,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         signUp();
     }
 
-    public void onBackPressed(){
+    public void onBackPressed()
+    {
         return;
     }
 
@@ -58,12 +59,14 @@ public class LoginActivity extends AppCompatActivity {
     public void logging(String username, int id, String name)
     {
         Toast.makeText(LoginActivity.this, "Welcome "+name, Toast.LENGTH_LONG).show();
+        // takes data from first activity to second activity
         Intent i = new Intent(getApplicationContext(), MainMenu.class);
         i.putExtra("Name", name);
         i.putExtra("ID",id);
         finish();
         startActivity(i);
     }
+
 
     public void login()
     {
@@ -190,12 +193,8 @@ public class LoginActivity extends AppCompatActivity {
 
         while (res.moveToNext()) {
             if (username.equals(res.getString(3))) {
-
                 return true;
-
-
             }
-
 
         }
         return false;
