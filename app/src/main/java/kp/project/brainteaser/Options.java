@@ -11,21 +11,27 @@ import android.widget.Toast;
 
 public class Options extends AppCompatActivity {
     Switch musicSwitch, soundSwitch,languageSwitch;
-    OptionsHelper optionsDB;
-    UserHelper userDB;
+    DatabaseHelper database;
     Button saveButton,logout;
+    String name;
+    int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            name = extras.getString("Name");
+            userID = extras.getInt("ID");
+
+        }
         musicSwitch = (Switch) findViewById(R.id.musicSwitch);
         soundSwitch = (Switch) findViewById(R.id.soundSwitch);
         languageSwitch = (Switch) findViewById(R.id.languageSwitch);
-        optionsDB = new OptionsHelper(this);
+        database = new DatabaseHelper(this);
         saveButton = (Button) findViewById(R.id.saveButton);
         logout = (Button)findViewById(R.id.logout);
-        Cursor res = optionsDB.getData();
-        userDB = new UserHelper(this);
+        Cursor res = database.getOptionsData();
         if(res.getCount() > 0)
         {
             while(res.moveToNext())
@@ -48,7 +54,7 @@ public class Options extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDB.logout();
+                database.logout();
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
             }
@@ -75,7 +81,7 @@ public class Options extends AppCompatActivity {
                     language=1;
                 else
                     language=0;
-                boolean isInserted = optionsDB.update(music,sound,language);
+                boolean isInserted = database.updateOptions(music,sound,language);
                 if(isInserted) {
                     Toast.makeText(Options.this, "Saved", Toast.LENGTH_LONG).show();
 
@@ -85,6 +91,14 @@ public class Options extends AppCompatActivity {
 
              }
         });
+    }
+
+    public void onBackPressed()
+    {
+        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+        i.putExtra("ID",userID);
+        i.putExtra("Name",name);
+        startActivity(i);
     }
 
 

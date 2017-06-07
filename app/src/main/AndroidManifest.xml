@@ -42,7 +42,9 @@
         <activity android:name=".WordGameII" />
         <activity android:name=".AnimationMathII" />
         <activity android:name=".TwoPairsII" />
-        <activity android:name=".IQTest"></activity>
+        <activity android:name=".IQTest" />
+        <activity android:name=".LogicalMathII" />
+        <activity android:name=".SwitchColorsII"></activity>
     </application>
 
 </manifest>

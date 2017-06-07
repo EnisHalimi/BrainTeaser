@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class AnimationMathII extends AppCompatActivity {
 
-    private ScoreHelper scoreDB;
+    private DatabaseHelper database;
     private TextView t1;
     private ImageView i1,i2,i3,i4;
     private Button first,second,third, start,pause;
@@ -37,7 +37,7 @@ public class AnimationMathII extends AppCompatActivity {
     private int userID;
     private String name;
     private SoundPlayer sound;
-    private OptionsHelper opDB;
+    private boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,8 @@ public class AnimationMathII extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        database = new DatabaseHelper(this);
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -77,20 +77,20 @@ public class AnimationMathII extends AppCompatActivity {
         fade = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
-        timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-        scoreDB = new ScoreHelper(this);
+        timeBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         start = (Button) findViewById(R.id.startButton);
         pause = (Button) findViewById(R.id.playPauseButton);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 start();
-                game();
+
             }
         });
     }
 
     public void start() {
+        started = true;
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
         pause();
@@ -111,6 +111,7 @@ public class AnimationMathII extends AppCompatActivity {
                 stop();
             }
         }.start();
+        game();
     }
 
     public void pause()
@@ -118,41 +119,38 @@ public class AnimationMathII extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMathII.this);
-                pauseMenu
-                        .setMessage("Game Paused")
-                        .setCancelable(false)
-                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                start();
-                            }
-                        })
-                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        })
-
-
-                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog pauseDialog = pauseMenu.create();
-                pauseDialog.show();
+               pauseAction();
             }
         });
+    }
+
+    public void pauseAction(){
+        if(started)
+        {
+            timer.cancel();
+        }
+        AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMathII.this);
+        pauseMenu
+                .setMessage("Game Paused")
+                .setCancelable(false)
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        start();
+                    }
+                })
+
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
+        AlertDialog pauseDialog = pauseMenu.create();
+        pauseDialog.show();
     }
 
     public void stop()
@@ -160,7 +158,7 @@ public class AnimationMathII extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Animation MathsII",score);
+            boolean status = database.createScore(userID,"Animation MathsII",score);
             if(status)
                 check="Saved";
             else
@@ -178,15 +176,6 @@ public class AnimationMathII extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = getIntent();
                         finish();
-                        i.putExtra("ID",userID);
-                        i.putExtra("Name",name);
-                        startActivity(i);
-                    }
-                })
-                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
                         i.putExtra("ID",userID);
                         i.putExtra("Name",name);
                         startActivity(i);
@@ -369,5 +358,11 @@ public class AnimationMathII extends AppCompatActivity {
             third.setText("" + result);
         }
     }
+
+    public void onBackPressed()
+    {
+        pauseAction();
+    }
+
 
 }

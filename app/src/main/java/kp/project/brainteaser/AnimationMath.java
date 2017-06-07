@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.util.Random;
 
 public class AnimationMath extends AppCompatActivity {
 
-    private ScoreHelper scoreDB;
+    private DatabaseHelper database;
     private TextView t1;
     private ImageView i1,i2,i3;
     private Button first,second,third, start,pause;
@@ -37,7 +38,7 @@ public class AnimationMath extends AppCompatActivity {
     private int userID;
     private String name;
     private SoundPlayer sound;
-    private OptionsHelper opDB;
+    private boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,8 @@ public class AnimationMath extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        database = new DatabaseHelper(this);
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -75,21 +76,21 @@ public class AnimationMath extends AppCompatActivity {
         diagonal = AnimationUtils.loadAnimation(this, R.anim.diagonalmove);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
-        timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-        scoreDB = new ScoreHelper(this);
+        timeBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         start = (Button) findViewById(R.id.startButton);
         pause = (Button) findViewById(R.id.playPauseButton);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 start();
-                game();
+
             }
         });
 
 
     }
     public void start() {
+        started =true;
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
         pause();
@@ -109,6 +110,7 @@ public class AnimationMath extends AppCompatActivity {
                 stop();
             }
         }.start();
+        game();
     }
 
     public void pause()
@@ -116,32 +118,40 @@ public class AnimationMath extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMath.this);
-                pauseMenu
-                        .setMessage("Game Paused")
-                        .setCancelable(false)
-                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                start();
-                            }
-                        })
-
-                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog pauseDialog = pauseMenu.create();
-                pauseDialog.show();
+               pauseAction();
             }
         });
 
+    }
+
+    public void pauseAction()
+    {
+        if(started)
+        {
+            timer.cancel();
+        }
+        AlertDialog.Builder pauseMenu=new AlertDialog.Builder(AnimationMath.this);
+        pauseMenu
+                .setMessage("Game Paused")
+                .setCancelable(false)
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        start();
+                    }
+                })
+
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
+        AlertDialog pauseDialog = pauseMenu.create();
+        pauseDialog.show();
     }
 
 
@@ -150,7 +160,7 @@ public class AnimationMath extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Animation Maths",score);
+            boolean status = database.createScore(userID,"Animation Maths",score);
             if(status)
                 check="Saved";
             else
@@ -320,5 +330,11 @@ public class AnimationMath extends AppCompatActivity {
             third.setText("" + result);
         }
     }
+
+    public void onBackPressed()
+    {
+        pauseAction();
+    }
+
 
 }

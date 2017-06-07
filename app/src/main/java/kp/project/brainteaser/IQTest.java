@@ -22,10 +22,9 @@ public class IQTest extends AppCompatActivity {
     int positionChecked[]=new int[20];
     int rightAnswers[]=new int[20];
     private int score=0;
-    ScoreHelper scoreDB;
+    DatabaseHelper database;
     String name;
     int userID;
-    OptionsHelper opDB;
     SoundPlayer sound;
     TextView counter;
 
@@ -39,14 +38,13 @@ public class IQTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iqtest);
-        scoreDB = new ScoreHelper(this);
+        database = new DatabaseHelper(this);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -560,9 +558,20 @@ public class IQTest extends AppCompatActivity {
     }
 
     private void gameOver() {
+        String check;
+        if(userID != 0)
+        {
+            boolean status = database.createScore(userID,"IQ Test",score);
+            if(status)
+                check="Saved";
+            else
+                check="Not Saved";
+        }
+        else
+            check="Not Saved";
         AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(IQTest.this);
         alertDialogBuilder
-                .setMessage("Game Over \nPlayer: "+countPoints)
+                .setMessage("Game Over \nPlayer: "+countPoints+" "+check)
                 .setCancelable(false)
                 .setPositiveButton("New", new DialogInterface.OnClickListener() {
                     @Override
@@ -579,6 +588,11 @@ public class IQTest extends AppCompatActivity {
         });
         AlertDialog alertDialog=alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    public void onBackPressed()
+    {
+        return;
     }
 
 

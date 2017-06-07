@@ -2,10 +2,8 @@ package kp.project.brainteaser;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,14 +12,14 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends AppCompatActivity {
-    UserHelper userDB;
+    DatabaseHelper database;
     EditText username,password,registerUsername,registerName,registerPassword,registerDate;
     Button signIn,register,signUp,back;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        userDB = new UserHelper(this);
+        database = new DatabaseHelper(this);
         checkLogin();
         setContentView(R.layout.activity_login);
         username = (EditText)findViewById(R.id.username);
@@ -40,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void checkLogin()
     {
-        Cursor res = userDB.getData();
+        Cursor res = database.getUserData();
         if(res.getCount()== 0)
             return;
 
@@ -85,14 +83,14 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please write a longer Password", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Cursor res = userDB.getData();
+                    Cursor res = database.getUserData();
                     if (res.getCount() == 0)
                         return;
 
                     while (res.moveToNext()) {
                         if (user.equals(res.getString(3))) {
                             if (pass.equals(res.getString(4))) {
-                                userDB.loginStatus(res.getInt(0));
+                                database.loginStatus(res.getInt(0));
                                 logging(user, res.getInt(0), res.getString(1));
                                 return;
 
@@ -161,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                         {
 
                         int Age = Integer.parseInt(age);
-                        boolean isInserted = userDB.insertData(name,Age,username,password,status);
+                        boolean isInserted = database.createUser(name,Age,username,password,status);
                         if(isInserted) {
                             Toast.makeText(LoginActivity.this, "User is registered", Toast.LENGTH_LONG).show();
                             Intent intent = getIntent();
@@ -187,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean exists(String username)
     {
-        Cursor res = userDB.getData();
+        Cursor res = database.getUserData();
         if (res.getCount() == 0)
             return false;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class Achievements extends AppCompatActivity {
-    ScoreHelper scoreDB;
+    DatabaseHelper database;
     TextView name1,game1,score1,name2,game2,score2,name3,game3,score3,name4,game4,score4,name5,game5,score5,name6,game6,score6;
     TextView name1II,game1II,score1II,name2II,game2II,score2II,name3II,game3II,score3II,name4II,game4II,score4II,name5II,game5II,score5II,name6II,game6II,score6II;
     TextView name1III,game1III,score1III,name2III,game2III,score2III,name3III,game3III,score3III,name4III,game4III,score4III,name5III,game5III,score5III,name6III,game6III,score6III;
@@ -82,7 +82,7 @@ public class Achievements extends AppCompatActivity {
             userID = extras.getInt("ID");
 
         }
-        scoreDB = new ScoreHelper(this);
+        database = new DatabaseHelper(this);
         int []scoresI=getScores("");
         int []scoresII=getScores("II");
         int []scoresIII =getScores("III");
@@ -123,23 +123,9 @@ public class Achievements extends AppCompatActivity {
         score5II.setText(scoresII[4]+"/10");
         score6II.setText(scoresII[5]+"/10");
         name1III.setText(name);
-        name2III.setText(name);
-        name3III.setText(name);
-        name4III.setText(name);
-        name5III.setText(name);
-        name6III.setText(name);
-        game1III.setText("Order NumbersIII");
-        game2III.setText("Two PairsIII");
-        game3III.setText("Switch ColorsIII");
-        game4III.setText("Word GameIII");
-        game5III.setText("Animation MathsIII");
-        game6III.setText("Logical MathIII");
-        score1III.setText(scoresIII[0]+"/20");
-        score2III.setText(scoresIII[1]+"/20");
-        score3III.setText(scoresIII[2]+"/20");
-        score4III.setText(scoresIII[3]+"/20");
-        score5III.setText(scoresIII[4]+"/20");
-        score6III.setText(scoresIII[5]+"/20");
+        game1III.setText("IQ Test");
+        score1III.setText(scoresIII[0]+"/200");
+
     }
 
     public void onBackPressed()
@@ -153,55 +139,65 @@ public class Achievements extends AppCompatActivity {
 
     public int[] getScores(String niveli)
     {
-        int [] scores = new int[6];
-        String game1 = "Order Numbers"+niveli;
-        String game2 = "Two Pairs"+niveli;
-        String game3 = "Switch Colors"+niveli;
-        String game4 = "Word Game"+niveli;
-        String game5 = "Animation Maths"+niveli;
-        String game6 = "Logical Math"+niveli;
-        Cursor res1 = scoreDB.getScore(userID,game1);
-        if(res1.getCount()== 0) {
-            return scores;
-        }
-        while(res1.moveToNext())
+        int[] scores;
+        if(niveli.equals("III"))
         {
-             scores[0] = res1.getInt(3);
+            scores = new int[1];
+            Cursor res1 = database.getScore(userID, "IQ Test");
+            if (res1.getCount() == 0) {
+                return scores;
+            }
+            while (res1.moveToNext()) {
+                scores[0] = res1.getInt(3);
+            }
         }
-        Cursor res2 = scoreDB.getScore(userID,game2);
-        if(res2.getCount()== 0)
-            return scores;
-        while(res2.moveToNext())
+        else
         {
-            scores[1] = res2.getInt(3);
-        }
-        Cursor res3 = scoreDB.getScore(userID,game3);
-        if(res3.getCount()== 0)
-            return scores;
-        while(res3.moveToNext())
-        {
-            scores[2] = res3.getInt(3);
-        }
-        Cursor res4 = scoreDB.getScore(userID,game4);
-        if(res4.getCount()== 0)
-            return scores;
-        while(res4.moveToNext())
-        {
-            scores[3] = res4.getInt(3);
-        }
-        Cursor res5 = scoreDB.getScore(userID,game5);
-        if(res5.getCount()== 0)
-            return scores;
-        while(res5.moveToNext())
-        {
-            scores[4] = res5.getInt(3);
-        }
-        Cursor res6 = scoreDB.getScore(userID,game6);
-        if(res6.getCount()== 0)
-            return scores;
-        while(res6.moveToNext())
-        {
-            scores[5] = res6.getInt(3);
+            scores = new int[6];
+            String game1 = "Order Numbers" + niveli;
+            String game2 = "Two Pairs" + niveli;
+            String game3 = "Switch Colors" + niveli;
+            String game4 = "Word Game" + niveli;
+            String game5 = "Animation Maths" + niveli;
+            String game6 = "Logical Math" + niveli;
+            Cursor res1 = database.getScore(userID, game1);
+            if (res1.getCount() == 0) {
+                return scores;
+            }
+            while (res1.moveToNext()) {
+                scores[0] = res1.getInt(3);
+            }
+            Cursor res2 = database.getScore(userID, game2);
+            if (res2.getCount() == 0)
+                return scores;
+            while (res2.moveToNext()) {
+                scores[1] = res2.getInt(3);
+            }
+            Cursor res3 = database.getScore(userID, game3);
+            if (res3.getCount() == 0)
+                return scores;
+            while (res3.moveToNext()) {
+                scores[2] = res3.getInt(3);
+            }
+            Cursor res4 = database.getScore(userID, game4);
+            if (res4.getCount() == 0)
+                return scores;
+            while (res4.moveToNext()) {
+                scores[3] = res4.getInt(3);
+            }
+            Cursor res5 = database.getScore(userID, game5);
+            if (res5.getCount() == 0)
+                return scores;
+            while (res5.moveToNext()) {
+                scores[4] = res5.getInt(3);
+            }
+            Cursor res6 = database.getScore(userID, game6);
+            if (res6.getCount() == 0)
+                return scores;
+            while (res6.moveToNext()) {
+                scores[5] = res6.getInt(3);
+            }
+
         }
         return scores;
     }

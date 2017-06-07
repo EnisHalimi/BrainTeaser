@@ -29,9 +29,9 @@ public class WordGame extends AppCompatActivity {
     private long secondsleft = 60000;
     private int userID;
     private String name;
-    private ScoreHelper scoreDB;
+    private DatabaseHelper database;
     private SoundPlayer sound;
-    private OptionsHelper opDB;
+    private boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class WordGame extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        database = new DatabaseHelper(this);
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -63,23 +63,23 @@ public class WordGame extends AppCompatActivity {
         words = new ArrayList<>();
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
-        timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-        scoreDB = new ScoreHelper(this);
+        timeBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         result = (TextView) findViewById(R.id.result);
         start = (Button) findViewById(R.id.startButton);
         pause = (Button) findViewById(R.id.playPauseButton);
+        addWords();
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addWords();
-                start();
-                game();
+             start();
+
             }
         });
 
     }
 
     public void start() {
+        started = true;
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
         pause();
@@ -96,6 +96,7 @@ public class WordGame extends AppCompatActivity {
                 stop();
             }
         }.start();
+        game();
     }
 
     public void pause()
@@ -103,40 +104,48 @@ public class WordGame extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGame.this);
-                pauseMenu
-                        .setMessage("Game Paused")
-                        .setCancelable(false)
-                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                start();
-                            }
-                        })
-                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), LogicalMath.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        })
-                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog pauseDialog = pauseMenu.create();
-                pauseDialog.show();
+                pauseAction();
             }
         });
 
+    }
+
+    public void pauseAction()
+    {
+        if(started)
+        {
+            timer.cancel();
+        }
+        AlertDialog.Builder pauseMenu=new AlertDialog.Builder(WordGame.this);
+        pauseMenu
+                .setMessage("Game Paused")
+                .setCancelable(false)
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        start();
+                    }
+                })
+                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), LogicalMath.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
+        AlertDialog pauseDialog = pauseMenu.create();
+        pauseDialog.show();
     }
 
     public void stop()
@@ -144,7 +153,7 @@ public class WordGame extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Word Game",score);
+            boolean status = database.createScore(userID,"Word Game",score);
             if(status)
                 check="Saved";
             else
@@ -260,7 +269,6 @@ public class WordGame extends AppCompatActivity {
         words.add("Brother");
         words.add("Mobile");
         words.add("Computer");
-        shuffleWords();
     }
 
     public void shuffleWords()
@@ -303,7 +311,7 @@ public class WordGame extends AppCompatActivity {
 
     public void onBackPressed()
     {
-        return;
+        pauseAction();
     }
 
 }

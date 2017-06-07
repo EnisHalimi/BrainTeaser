@@ -19,7 +19,7 @@ import java.util.List;
 
 public class OrderNumbersII extends AppCompatActivity {
 
-    private ScoreHelper scoreDB;
+    private DatabaseHelper database;
     private int counter = 1;
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9,b10,b11,b12,b13,b14,b15,b16,start, pause;
     private List<Integer> numbers;
@@ -31,7 +31,7 @@ public class OrderNumbersII extends AppCompatActivity {
     private int userID;
     private String name;
     private SoundPlayer sound;
-    private OptionsHelper opDB;
+    private boolean started;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class OrderNumbersII extends AppCompatActivity {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        database = new DatabaseHelper(this);
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -78,18 +78,18 @@ public class OrderNumbersII extends AppCompatActivity {
         result = (TextView)findViewById(R.id.result);
         timeBar = (ProgressBar) findViewById(R.id.timeBar);
         timeBar.setMax(60);
-        timeBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-        scoreDB = new ScoreHelper(this);
+        timeBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 start();
-                game();
+
             }
         });
     }
 
     public void start() {
+        started=true;
         start.setVisibility(View.INVISIBLE);
         pause.setVisibility(View.VISIBLE);
         pause();
@@ -106,6 +106,7 @@ public class OrderNumbersII extends AppCompatActivity {
                 stop();
             }
         }.start();
+        game();
     }
 
     public void pause()
@@ -113,39 +114,47 @@ public class OrderNumbersII extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(OrderNumbersII.this);
-                pauseMenu
-                        .setMessage("Game Paused")
-                        .setCancelable(false)
-                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                start();
-                            }
-                        })
-                        .setNegativeButton("Next", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), WordGameII.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        })
-                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog pauseDialog = pauseMenu.create();
-                pauseDialog.show();
+              pauseAction();
             }
         });
+    }
+
+    public void pauseAction()
+    {
+        if(started)
+        {
+            timer.cancel();
+        }
+        AlertDialog.Builder pauseMenu=new AlertDialog.Builder(OrderNumbersII.this);
+        pauseMenu
+                .setMessage("Game Paused")
+                .setCancelable(false)
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        start();
+                    }
+                })
+                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
+        AlertDialog pauseDialog = pauseMenu.create();
+        pauseDialog.show();
     }
 
     public void stop()
@@ -153,7 +162,7 @@ public class OrderNumbersII extends AppCompatActivity {
         String check;
         if(userID != 0)
         {
-            boolean status = scoreDB.create(userID,"Order NumbersII",score);
+            boolean status = database.createScore(userID,"Order NumbersII",score);
             if(status)
                 check="Saved";
             else
@@ -179,7 +188,7 @@ public class OrderNumbersII extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Intent i = new Intent(getApplicationContext(), WordGameII.class);
+                        Intent i = new Intent(getApplicationContext(), TwoPairsII.class);
                         i.putExtra("ID",userID);
                         i.putExtra("Name",name);
                         startActivity(i);
@@ -410,7 +419,7 @@ public class OrderNumbersII extends AppCompatActivity {
 
     public void onBackPressed()
     {
-        return;
+        pauseAction();
     }
 
 

@@ -1,24 +1,22 @@
 package kp.project.brainteaser;
 
-import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Path;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainMenu extends AppCompatActivity {
 
-    UserHelper userDB;
+    DatabaseHelper database;
     private String user_name;
     private int userID;
-    ScoreHelper scoreDB;
+    AlertDialog pauseDialog;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +25,7 @@ public class MainMenu extends AppCompatActivity {
         Button playButton = (Button) findViewById(R.id.playButton);
         Button achievementsButton = (Button) findViewById(R.id.achivmentsButton);
         Button optionsButton = (Button) findViewById(R.id.optionsButton);
-        userDB = new UserHelper(this);
-        scoreDB = new ScoreHelper(this);
+        database = new DatabaseHelper(this);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,17 +91,27 @@ public class MainMenu extends AppCompatActivity {
         optionsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), Options.class);
+                i.putExtra("ID",userID);
+                i.putExtra("Name",user_name);
                 startActivity(i);
 
             }
         });
     }
+
     public void onBackPressed(){
+
         Intent i = new Intent(getApplicationContext(), MainMenu.class);
         i.putExtra("ID",userID);
         i.putExtra("Name",user_name);
         startActivity(i);
+
     }
+    public void hide()
+    {
+        pauseDialog.hide();
+    }
+
 
     public void setUser()
     {
@@ -127,7 +134,7 @@ public class MainMenu extends AppCompatActivity {
         String game4 = "Word Game"+niveli;
         String game5 = "Animation Maths"+niveli;
         String game6 = "Logical Math"+niveli;
-        Cursor res1 = scoreDB.getScore(userID,game1);
+        Cursor res1 = database.getScore(userID,game1);
         if(res1.getCount()== 0) {
             return scores;
         }
@@ -135,35 +142,35 @@ public class MainMenu extends AppCompatActivity {
         {
             scores[0] = res1.getInt(3);
         }
-        Cursor res2 = scoreDB.getScore(userID,game2);
+        Cursor res2 = database.getScore(userID,game2);
         if(res2.getCount()== 0)
             return scores;
         while(res2.moveToNext())
         {
             scores[1] = res2.getInt(3);
         }
-        Cursor res3 = scoreDB.getScore(userID,game3);
+        Cursor res3 = database.getScore(userID,game3);
         if(res3.getCount()== 0)
             return scores;
         while(res3.moveToNext())
         {
             scores[2] = res3.getInt(3);
         }
-        Cursor res4 = scoreDB.getScore(userID,game4);
+        Cursor res4 = database.getScore(userID,game4);
         if(res4.getCount()== 0)
             return scores;
         while(res4.moveToNext())
         {
             scores[3] = res4.getInt(3);
         }
-        Cursor res5 = scoreDB.getScore(userID,game5);
+        Cursor res5 = database.getScore(userID,game5);
         if(res5.getCount()== 0)
             return scores;
         while(res5.moveToNext())
         {
             scores[4] = res5.getInt(3);
         }
-        Cursor res6 = scoreDB.getScore(userID,game6);
+        Cursor res6 = database.getScore(userID,game6);
         if(res6.getCount()== 0)
             return scores;
         while(res6.moveToNext())

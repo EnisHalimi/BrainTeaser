@@ -29,23 +29,22 @@ public class TwoPairsII extends AppCompatActivity {
     int userID;
     String name;
     Button pause;
+    AlertDialog pauseDialog;
     SoundPlayer sound;
-    OptionsHelper opDB;
-    ScoreHelper scoreDB;
+    DatabaseHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_pairs_ii);
-        scoreDB = new ScoreHelper(this);
+        database = new DatabaseHelper(this);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getInt("ID");
             name = extras.getString("Name");
         }
-        opDB = new OptionsHelper(this);
-        Cursor res = opDB.getData();
+        Cursor res = database.getOptionsData();
         if(res.getCount()== 0)
             return;
         float soundvolume = 0;
@@ -61,39 +60,14 @@ public class TwoPairsII extends AppCompatActivity {
 
         pause = (Button)findViewById(R.id.playPauseButton);
         pause.setOnClickListener(new View.OnClickListener() {
-            AlertDialog pauseDialog;
+
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder pauseMenu=new AlertDialog.Builder(TwoPairsII.this);
-                pauseMenu
-
-                        .setMessage("Game Paused")
-                        .setCancelable(false)
-                        .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                hide();
-                            }
-                        })
-
-                        .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplicationContext(), MainMenu.class);
-                                i.putExtra("ID",userID);
-                                i.putExtra("Name",name);
-                                startActivity(i);
-                            }
-                        });
-                pauseDialog = pauseMenu.create();
-                pauseDialog.show();
+                pauseAction();
 
             }
 
-            public void hide()
-            {
-                pauseDialog.hide();
-            }
+
         });
         //tv_p1=(TextView)findViewById(R.id.tv_p1);
 
@@ -596,7 +570,7 @@ public class TwoPairsII extends AppCompatActivity {
             String check;
             if(userID != 0)
             {
-                boolean status = scoreDB.create(userID,"Two PairsII",playerPoins);
+                boolean status = database.createScore(userID,"Two PairsII",playerPoins);
                 if(status)
                     check="Saved";
                 else
@@ -608,7 +582,6 @@ public class TwoPairsII extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(TwoPairsII.this);
             alertDialogBuilder
                     .setMessage("Game Over \nScore: "+playerPoins+"  "+check)
-                    .setCancelable(false)
                     .setPositiveButton("Restart", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -619,7 +592,15 @@ public class TwoPairsII extends AppCompatActivity {
                             startActivity(i);
 
                         }
-                    })
+                    }).setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent i = new Intent(getApplicationContext(), SwitchColorsII.class);
+                    i.putExtra("ID",userID);
+                    i.putExtra("Name",name);
+                    startActivity(i);
+                }
+            })
                     .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -671,6 +652,51 @@ public class TwoPairsII extends AppCompatActivity {
         }
 
     }
+
+    public void pauseAction()
+    {
+        AlertDialog.Builder pauseMenu=new AlertDialog.Builder(TwoPairsII.this);
+        pauseMenu
+
+                .setMessage("Game Paused")
+                .setCancelable(false)
+                .setPositiveButton("Resume", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        hide();
+                    }
+                })
+                .setNegativeButton("Next", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), SwitchColorsII.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getApplicationContext(), MainMenu.class);
+                        i.putExtra("ID",userID);
+                        i.putExtra("Name",name);
+                        startActivity(i);
+                    }
+                });
+        pauseDialog = pauseMenu.create();
+        pauseDialog.show();
+    }
+    public void hide()
+    {
+        pauseDialog.hide();
+    }
+
+    public void onBackPressed()
+    {
+        pauseAction();
+    }
+
 }
 
 

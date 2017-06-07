@@ -2,36 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/orderNumbersLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="top|center"
-    android:orientation="vertical"
     android:padding="16dp"
     android:weightSum="1"
-    tools:context="kp.project.brainteaser.LogicalMath"
-    >
+    tools:context="kp.project.brainteaser.LogicalMathII"
+    android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:id="@+id/headerView"
+
+    <HorizontalScrollView
+        android:id="@+id/headerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end">
+
+        <LinearLayout
+            android:id="@+id/pauseLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/pauseLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <Button
+                android:id="@+id/playPauseButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/pause" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
-                <Button
-                    android:id="@+id/playPauseButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/pause" />
-            </LinearLayout>
-        </HorizontalScrollView>
+
 
     <GridLayout
         android:id="@+id/gameLayout"
@@ -43,43 +44,6 @@
         tools:layout_editor_absoluteY="8dp"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true">
-
-        <ImageView
-            android:id="@+id/f1"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="10dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/f22"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_column="2"
-            android:layout_row="1"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/textView32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:gravity="center"
-            android:text="+"
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_marginRight="10dp"
-            android:layout_row="0"
-            android:gravity="center"
-            android:text="+"
-            android:textSize="36sp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -93,37 +57,6 @@
             android:text="="
             android:textSize="36sp" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_marginRight="10dp"
-            android:layout_row="0"
-            android:gravity="center"
-            android:text="+"
-            android:textSize="36sp" />
-
-        <ImageView
-            android:id="@+id/f21"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_column="0"
-            android:layout_marginBottom="30dp"
-            android:layout_row="1"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/f2"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_column="2"
-            android:layout_marginRight="10dp"
-            android:layout_row="0"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_launcher" />
-
         <ImageView
             android:id="@+id/f3"
             android:layout_width="35dp"
@@ -136,31 +69,11 @@
 
         <TextView
             android:id="@+id/answer1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="6"
 
             android:layout_row="0"
-            android:gravity="center"
-            android:text="\?"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="1"
-            android:gravity="center"
-            android:text="="
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/answer2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="1"
             android:gravity="center"
             android:text="\?"
             android:textSize="24sp" />
@@ -176,8 +89,8 @@
 
         <TextView
             android:id="@+id/textView42"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="3"
             android:layout_row="3"
             android:autoText="true"
@@ -194,6 +107,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
+            android:selectAllOnFocus="false"
             android:textSize="24sp" />
 
         <ImageView
@@ -208,8 +122,8 @@
 
         <TextView
             android:id="@+id/textView36"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="1"
             android:layout_row="2"
             android:autoText="true"
@@ -227,8 +141,8 @@
 
         <TextView
             android:id="@+id/textView38"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="3"
             android:layout_row="2"
             android:autoText="true"
@@ -246,8 +160,8 @@
 
         <TextView
             android:id="@+id/textView39"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="5"
             android:layout_row="2"
             android:autoText="true"
@@ -257,14 +171,128 @@
 
         <TextView
             android:id="@+id/answer3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_column="6"
             android:layout_row="2"
             android:autoText="true"
             android:gravity="center"
             android:text="\?"
             android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/nr2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="3"
+            android:layout_row="0"
+            android:text="nr"
+            android:textSize="30dp" />
+
+        <ImageView
+            android:id="@+id/f2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="1"
+            android:layout_marginRight="10dp"
+            android:layout_row="0"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="2"
+            android:layout_marginRight="10dp"
+            android:layout_row="0"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/nr1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:text="nr"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="36sp" />
+
+        <ImageView
+            android:id="@+id/f21"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="1"
+            android:layout_marginBottom="30dp"
+            android:layout_row="1"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/nr3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:text="nr"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/answer2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="6"
+            android:layout_row="1"
+            android:gravity="center"
+            android:text="\?"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_column="5"
+            android:layout_row="1"
+            android:gravity="center"
+            android:text="="
+            android:textSize="36sp" />
+
+        <ImageView
+            android:id="@+id/f22"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="4"
+            android:layout_row="1"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/nr4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            android:layout_row="1"
+            android:text="nr"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/nr5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_column="1"
+            android:layout_row="3"
+            android:text="nr"
+            android:textSize="30dp" />
 
     </GridLayout>
 
