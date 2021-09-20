@@ -21,3 +21,15 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+plugins {
+  id "org.sonarqube" version "3.3"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "EnisHalimi_BrainTeaser"
+    property "sonar.organization", "enishalimi"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
